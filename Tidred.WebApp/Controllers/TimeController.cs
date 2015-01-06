@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Tidred.WebApp.Controllers
 {
-    public class HomeController : Controller
+    public class TimeController : Controller
     {
         public ActionResult Index()
         {
