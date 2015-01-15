@@ -217,7 +217,7 @@ namespace Tidred.WebApp.Controllers
 
         // GET api/Account/ExternalLogin
         [OverrideAuthentication]
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [AllowAnonymous]
         [Route("ExternalLogin", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
