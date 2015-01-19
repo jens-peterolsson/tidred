@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Tidred.Repo;
 
 namespace Tidred.Services
 {
     public class ReportService : IReportService
     {
-        private readonly ICustomerRepository _customerRepo = RepositoryFactory.Instance.CreateCustomerRepository();
-        private readonly ITimeRepository _timeRepo = RepositoryFactory.Instance.CreateTimeRepository();
-        private readonly IProjectRepository _projectRepo = RepositoryFactory.Instance.CreateProjectRepository();
+        private readonly ICustomerRepository _customerRepo = RepoFactory.Instance.CreateCustomerRepo();
+        private readonly ITimeRepository _timeRepo = RepoFactory.Instance.CreateTimeRepo();
+        private readonly IProjectRepository _projectRepo = RepoFactory.Instance.CreateProjectRepo();
 
         private const string FormatWithDecimals = "{0:#,0.00}";
         private const string FormatWithoutDecimals = "{0:#,0}";

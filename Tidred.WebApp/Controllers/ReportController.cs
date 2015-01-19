@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Tidred.Repo;
 using Tidred.Services;
 using Tidred.WebApp.Models;
 
@@ -40,7 +42,7 @@ namespace Tidred.WebApp.Controllers
                     GetCustomerTotal(model, reportService);
                     break;
                 case ReportType.WorkingHours:
-                    model.Result = reportService.WorkingHours(Param.CurrentUserId, model.StartDate, model.EndDate);
+                    model.Result = reportService.WorkingHours(model.UserId, model.StartDate, model.EndDate);
                     break;
                 case ReportType.ProjectSummary:
                     GetProjectSummary(model, reportService);
@@ -83,12 +85,15 @@ namespace Tidred.WebApp.Controllers
                 { "Inget resultat inläst.", string.Empty }
             };
 
-            var projectService = ServiceFactory.Instance.CreateProjectService();
-            var customerService = ServiceFactory.Instance.CreateCustomerService();
+            var projectRepo = RepoFactory.Instance.CreateProjectRepo();
+            var customerRepo = RepoFactory.Instance.CreateCustomerRepo();
+            var userRepo = RepoFactory.Instance.CreateUserRepo();
 
-            var customers = customerService.GetCustomers(Param.CurrentCoId).ToList();
+            var user = userRepo.GetUser(User.Identity.GetUserId());
+
+            var customers = customerRepo.GetAllCustomers(user.CoId).ToList();
             model.Customers = new SelectList(customers, "CustomerId", "Name");
-            var projects = projectService.GetAllProjects(Param.CurrentCoId).ToList();
+            var projects = projectRepo.GetAllProjects(user.CoId).ToList();
             model.Projects = new SelectList(projects, "ProjectId", "Name");
 
             if (model.EndDate == DateTime.MinValue)

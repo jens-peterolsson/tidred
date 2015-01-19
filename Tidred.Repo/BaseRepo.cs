@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Tidred.Repo
 {
-    public abstract class BaseRepo<T> where T : class
+    public abstract class BaseRepo<T> : IBaseRepo<T> where T : class
     {
         public List<T> GetAll()
         {

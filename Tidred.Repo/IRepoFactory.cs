@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tidred.Repo
+﻿namespace Tidred.Repo
 {
     public interface IRepoFactory
     {
-        IUserRepo CreateUserRepo();
+        IUserRepository CreateUserRepo();
+        ICustomerRepository CreateCustomerRepo();
+        IProjectRepository CreateProjectRepo();
+        IProjectFixedPriceRepository CreateProjectFixedPriceRepo();
+        ITimeRepository CreateTimeRepo();
     }
 }

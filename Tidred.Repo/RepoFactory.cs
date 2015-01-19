@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tidred.Repo
+﻿namespace Tidred.Repo
 {
     public class RepoFactory : IRepoFactory
     {
@@ -19,9 +13,29 @@ namespace Tidred.Repo
             set { _instance = value; }
         }
 
-        public IUserRepo CreateUserRepo()
+        public IUserRepository CreateUserRepo()
         {
-            return new UserRepo();
+            return new UserRepository();
+        }
+
+        public ICustomerRepository CreateCustomerRepo()
+        {
+            return new CustomerRepository();
+        }
+
+        public IProjectRepository CreateProjectRepo()
+        {
+            return new ProjectRepository();
+        }
+
+        public IProjectFixedPriceRepository CreateProjectFixedPriceRepo()
+        {
+            return new ProjectFixedPriceRepository();
+        }
+
+        public ITimeRepository CreateTimeRepo()
+        {
+            return new TimeRepository();
         }
     }
 }

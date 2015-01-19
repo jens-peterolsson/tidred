@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tidred.Repo
 {
-    public interface IUserRepo
+    public interface IUserRepository
     {
         User GetUser(string userId);
     }

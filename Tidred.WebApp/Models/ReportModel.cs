@@ -16,6 +16,8 @@ namespace Tidred.WebApp.Models
 
     public class ReportModel
     {
+        public string UserId { get; set; }
+        public int CoId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public long? CustomerId { get; set; }

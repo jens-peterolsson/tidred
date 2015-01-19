@@ -70,10 +70,16 @@
     <Compile Include="Customer.cs">
       <DependentUpon>TidredEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomerRepository.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="IBaseRepo.cs" />
+    <Compile Include="ICustomerRepository.cs" />
+    <Compile Include="IProjectFixedPriceRepository.cs" />
+    <Compile Include="IProjectRepository.cs" />
     <Compile Include="IRepoFactory.cs" />
-    <Compile Include="IUserRepo.cs" />
+    <Compile Include="ITimeRepository.cs" />
+    <Compile Include="IUserRepository.cs" />
     <Compile Include="PriceType.cs">
       <DependentUpon>TidredEntities.tt</DependentUpon>
     </Compile>
@@ -83,6 +89,8 @@
     <Compile Include="ProjectFixedPrice.cs">
       <DependentUpon>TidredEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProjectFixedPriceRepository.cs" />
+    <Compile Include="ProjectRepository.cs" />
     <Compile Include="RepoFactory.cs" />
     <Compile Include="TidredEntities.Context.cs">
       <AutoGen>True</AutoGen>
@@ -102,7 +110,8 @@
     <Compile Include="TimeEntry.cs">
       <DependentUpon>TidredEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserRepo.cs" />
+    <Compile Include="TimeRepository.cs" />
+    <Compile Include="UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserTimeEntryPref.cs">
       <DependentUpon>TidredEntities.tt</DependentUpon>

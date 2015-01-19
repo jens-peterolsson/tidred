@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tidred.Repo
 {
-    public class UserRepo : IUserRepo
+    public class UserRepository : IUserRepository
     {
         private readonly TidredContext _context = new TidredContext();
 
