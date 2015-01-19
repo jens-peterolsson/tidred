@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+                        <input id="btnLogin" type="button" value="Log in" class="btn btn-default" />
                     </div>
                 </div>
                 <p>
@@ -43,13 +43,13 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script>
     
-        $("#userForm").submit(function (event) {
+        $("#btnLogin").click(function (event) {
 
             var userName = $("#UserName").val();
             var pass = $("#Password").val();
             var returnUrl = "@ViewBag.ReturnUrl";
-            event.preventDefault();
             authenticateUser(userName, pass, returnUrl);
+            //event.preventDefault();
         });
     </script>
 }

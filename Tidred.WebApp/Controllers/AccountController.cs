@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using Tidred.Repo;
 using Tidred.WebApp.Models;
 using Tidred.WebApp.Providers;
 using Tidred.WebApp.Results;
@@ -43,16 +44,19 @@ namespace Tidred.WebApp.Controllers
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
-        public UserInfoViewModel GetUserInfo()
+        public User GetUserInfo()
         {
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var userRepo = RepoFactory.Instance.CreateUserRepo();
+            var userId = User.Identity.GetUserId();
 
-            return new UserInfoViewModel
+            var user = new User
             {
                 UserName = User.Identity.GetUserName(),
-                HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                UserId = userId,
+                CoId = userRepo.GetUser(userId).CoId
             };
+
+            return user;
         }
 
         // POST api/Account/Logout

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="491757d3ba194fe288965e7d5c446422" Name="Diagram1">
+        <EntityTypeShape EntityType="Tidred.Repo.AspNetRole" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.AspNetUser" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.Company" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.Currency" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.Customer" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.PriceType" Width="1.5" PointX="7.5" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.ProjectFixedPrice" Width="1.5" PointX="12" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.Project" Width="1.5" PointX="9.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.TimeEntry" Width="1.5" PointX="9.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.UserTimeEntryPref" Width="1.5" PointX="12.75" PointY="12.375" IsExpanded="true" />
+        <AssociationConnector Association="Tidred.Repo.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_TimeEntries_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_UserTimeEntryPrefs_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_Customers_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_PriceTypes_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_Customers_Currencies" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_Projects_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_TimeEntries_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_UserTimeEntryPrefs_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_TimeEntries_PriceTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_UserTimeEntryPrefs_PriceTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_ProjectPrices_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_TimeEntries_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.FK_UserTimeEntryPrefs_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="Tidred.Repo.UserCompany" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -9,7 +9,7 @@
     return headers;
 };
 
-var getUserInfo = function() {
+var applyUserInfo = function(returnUrl) {
 
     $.ajax({
         type: 'GET',
@@ -17,7 +17,10 @@ var getUserInfo = function() {
         headers: getAccountHeader()
     }).done(function(data) {
         sessionStorage.setItem("userName", data.UserName);
-    }).fail(function(err) {
+        sessionStorage.setItem("userId", data.UserId);
+        sessionStorage.setItem("coId", data.CoId);
+        window.location.href = returnUrl;
+    }).fail(function (err) {
         alert("Error! " + err.responseText);
     });
 
@@ -39,8 +42,7 @@ var authenticateUser = function(userName, pass, returnUrl) {
         // Cache the access token in session storage
         sessionStorage.setItem("userToken", data.access_token);
         // cache user info
-        getUserInfo();
-        window.location.href = returnUrl;
+        applyUserInfo(returnUrl);
     }).fail(function (err) {
         alert("Error! " + err.responseText);
     });

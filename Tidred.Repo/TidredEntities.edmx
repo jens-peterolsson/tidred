@@ -1,0 +1,1061 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Tidred.Repo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+          <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CoID" />
+          </Key>
+          <Property Name="CoID" Type="int" Nullable="false" />
+          <Property Name="CoName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Currencies">
+          <Key>
+            <PropertyRef Name="CurrencyId" />
+          </Key>
+          <Property Name="CurrencyId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CurrencyId" Type="bigint" Nullable="false" />
+          <Property Name="CoID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PriceTypes">
+          <Key>
+            <PropertyRef Name="PriceTypeId" />
+          </Key>
+          <Property Name="PriceTypeId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CoID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectFixedPrices">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="bigint" Nullable="false" />
+          <Property Name="Price" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CustomerId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TimeEntries">
+          <Key>
+            <PropertyRef Name="TimeEntryId" />
+          </Key>
+          <Property Name="TimeEntryId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Day" Type="date" Nullable="false" />
+          <Property Name="CustomerId" Type="bigint" Nullable="false" />
+          <Property Name="ProjectId" Type="bigint" />
+          <Property Name="PriceTypeId" Type="bigint" Nullable="false" />
+          <Property Name="Hours" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserCompany">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CoId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTimeEntryPrefs">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CustomerId" Type="bigint" Nullable="false" />
+          <Property Name="ProjectId" Type="bigint" />
+          <Property Name="PriceTypeId" Type="bigint" />
+        </EntityType>
+        <Association Name="FK_Customers_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CoID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="CoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Currencies">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="CurrencyId" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceTypes_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="PriceTypes" Type="Self.PriceTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CoID" />
+            </Principal>
+            <Dependent Role="PriceTypes">
+              <PropertyRef Name="CoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPrices_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectFixedPrices" Type="Self.ProjectFixedPrices" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectFixedPrices">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeEntries_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="TimeEntries" Type="Self.TimeEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeEntries">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeEntries_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="TimeEntries" Type="Self.TimeEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="TimeEntries">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeEntries_PriceTypes">
+          <End Role="PriceTypes" Type="Self.PriceTypes" Multiplicity="1" />
+          <End Role="TimeEntries" Type="Self.TimeEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriceTypes">
+              <PropertyRef Name="PriceTypeId" />
+            </Principal>
+            <Dependent Role="TimeEntries">
+              <PropertyRef Name="PriceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeEntries_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="TimeEntries" Type="Self.TimeEntries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="TimeEntries">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCompany_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserCompany" Type="Self.UserCompany" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCompany">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCompany_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="UserCompany" Type="Self.UserCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CoID" />
+            </Principal>
+            <Dependent Role="UserCompany">
+              <PropertyRef Name="CoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTimeEntryPrefs_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserTimeEntryPrefs" Type="Self.UserTimeEntryPrefs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTimeEntryPrefs">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTimeEntryPrefs_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="UserTimeEntryPrefs" Type="Self.UserTimeEntryPrefs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="UserTimeEntryPrefs">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTimeEntryPrefs_PriceTypes">
+          <End Role="PriceTypes" Type="Self.PriceTypes" Multiplicity="0..1" />
+          <End Role="UserTimeEntryPrefs" Type="Self.UserTimeEntryPrefs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriceTypes">
+              <PropertyRef Name="PriceTypeId" />
+            </Principal>
+            <Dependent Role="UserTimeEntryPrefs">
+              <PropertyRef Name="PriceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTimeEntryPrefs_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="UserTimeEntryPrefs" Type="Self.UserTimeEntryPrefs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="UserTimeEntryPrefs">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TidredRepoStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PriceTypes" EntityType="Self.PriceTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectFixedPrices" EntityType="Self.ProjectFixedPrices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeEntries" EntityType="Self.TimeEntries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserCompany" EntityType="Self.UserCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTimeEntryPrefs" EntityType="Self.UserTimeEntryPrefs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Customers_Company" Association="Self.FK_Customers_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Currencies" Association="Self.FK_Customers_Currencies">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceTypes_Company" Association="Self.FK_PriceTypes_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="PriceTypes" EntitySet="PriceTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPrices_Projects" Association="Self.FK_ProjectPrices_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectFixedPrices" EntitySet="ProjectFixedPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Customers" Association="Self.FK_Projects_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeEntries_AspNetUsers" Association="Self.FK_TimeEntries_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TimeEntries" EntitySet="TimeEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeEntries_Customers" Association="Self.FK_TimeEntries_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="TimeEntries" EntitySet="TimeEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeEntries_PriceTypes" Association="Self.FK_TimeEntries_PriceTypes">
+            <End Role="PriceTypes" EntitySet="PriceTypes" />
+            <End Role="TimeEntries" EntitySet="TimeEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeEntries_Projects" Association="Self.FK_TimeEntries_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="TimeEntries" EntitySet="TimeEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCompany_AspNetUsers" Association="Self.FK_UserCompany_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserCompany" EntitySet="UserCompany" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCompany_Company" Association="Self.FK_UserCompany_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="UserCompany" EntitySet="UserCompany" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTimeEntryPrefs_AspNetUsers" Association="Self.FK_UserTimeEntryPrefs_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserTimeEntryPrefs" EntitySet="UserTimeEntryPrefs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTimeEntryPrefs_Customers" Association="Self.FK_UserTimeEntryPrefs_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="UserTimeEntryPrefs" EntitySet="UserTimeEntryPrefs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTimeEntryPrefs_PriceTypes" Association="Self.FK_UserTimeEntryPrefs_PriceTypes">
+            <End Role="PriceTypes" EntitySet="PriceTypes" />
+            <End Role="UserTimeEntryPrefs" EntitySet="UserTimeEntryPrefs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTimeEntryPrefs_Projects" Association="Self.FK_UserTimeEntryPrefs_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="UserTimeEntryPrefs" EntitySet="UserTimeEntryPrefs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Tidred.Repo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="TimeEntries" Relationship="Self.FK_TimeEntries_AspNetUsers" FromRole="AspNetUsers" ToRole="TimeEntries" />
+          <NavigationProperty Name="UserTimeEntryPref" Relationship="Self.FK_UserTimeEntryPrefs_AspNetUsers" FromRole="AspNetUsers" ToRole="UserTimeEntryPrefs" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Company" Relationship="Self.UserCompany" FromRole="AspNetUsers" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CoID" />
+          </Key>
+          <Property Name="CoID" Type="Int32" Nullable="false" />
+          <Property Name="CoName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Company" FromRole="Company" ToRole="Customers" />
+          <NavigationProperty Name="PriceTypes" Relationship="Self.FK_PriceTypes_Company" FromRole="Company" ToRole="PriceTypes" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.UserCompany" FromRole="Company" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="CurrencyId" />
+          </Key>
+          <Property Name="CurrencyId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Currencies" FromRole="Currencies" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CurrencyId" Type="Int64" Nullable="false" />
+          <Property Name="CoID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Customers_Company" FromRole="Customers" ToRole="Company" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_Customers_Currencies" FromRole="Customers" ToRole="Currencies" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK_Projects_Customers" FromRole="Customers" ToRole="Projects" />
+          <NavigationProperty Name="TimeEntries" Relationship="Self.FK_TimeEntries_Customers" FromRole="Customers" ToRole="TimeEntries" />
+          <NavigationProperty Name="UserTimeEntryPrefs" Relationship="Self.FK_UserTimeEntryPrefs_Customers" FromRole="Customers" ToRole="UserTimeEntryPrefs" />
+        </EntityType>
+        <EntityType Name="PriceType">
+          <Key>
+            <PropertyRef Name="PriceTypeId" />
+          </Key>
+          <Property Name="PriceTypeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CoID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_PriceTypes_Company" FromRole="PriceTypes" ToRole="Company" />
+          <NavigationProperty Name="TimeEntries" Relationship="Self.FK_TimeEntries_PriceTypes" FromRole="PriceTypes" ToRole="TimeEntries" />
+          <NavigationProperty Name="UserTimeEntryPrefs" Relationship="Self.FK_UserTimeEntryPrefs_PriceTypes" FromRole="PriceTypes" ToRole="UserTimeEntryPrefs" />
+        </EntityType>
+        <EntityType Name="ProjectFixedPrice">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int64" Nullable="false" />
+          <Property Name="Price" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_ProjectPrices_Projects" FromRole="ProjectFixedPrices" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Projects_Customers" FromRole="Projects" ToRole="Customers" />
+          <NavigationProperty Name="ProjectFixedPrice" Relationship="Self.FK_ProjectPrices_Projects" FromRole="Projects" ToRole="ProjectFixedPrices" />
+          <NavigationProperty Name="TimeEntries" Relationship="Self.FK_TimeEntries_Projects" FromRole="Projects" ToRole="TimeEntries" />
+          <NavigationProperty Name="UserTimeEntryPrefs" Relationship="Self.FK_UserTimeEntryPrefs_Projects" FromRole="Projects" ToRole="UserTimeEntryPrefs" />
+        </EntityType>
+        <EntityType Name="TimeEntry">
+          <Key>
+            <PropertyRef Name="TimeEntryId" />
+          </Key>
+          <Property Name="TimeEntryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Day" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CustomerId" Type="Int64" Nullable="false" />
+          <Property Name="ProjectId" Type="Int64" />
+          <Property Name="PriceTypeId" Type="Int64" Nullable="false" />
+          <Property Name="Hours" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_TimeEntries_AspNetUsers" FromRole="TimeEntries" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_TimeEntries_Customers" FromRole="TimeEntries" ToRole="Customers" />
+          <NavigationProperty Name="PriceType" Relationship="Self.FK_TimeEntries_PriceTypes" FromRole="TimeEntries" ToRole="PriceTypes" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_TimeEntries_Projects" FromRole="TimeEntries" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="UserTimeEntryPref">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerId" Type="Int64" Nullable="false" />
+          <Property Name="ProjectId" Type="Int64" />
+          <Property Name="PriceTypeId" Type="Int64" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserTimeEntryPrefs_AspNetUsers" FromRole="UserTimeEntryPrefs" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_UserTimeEntryPrefs_Customers" FromRole="UserTimeEntryPrefs" ToRole="Customers" />
+          <NavigationProperty Name="PriceType" Relationship="Self.FK_UserTimeEntryPrefs_PriceTypes" FromRole="UserTimeEntryPrefs" ToRole="PriceTypes" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_UserTimeEntryPrefs_Projects" FromRole="UserTimeEntryPrefs" ToRole="Projects" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeEntries_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="TimeEntries" Type="Self.TimeEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeEntries">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTimeEntryPrefs_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="UserTimeEntryPrefs" Type="Self.UserTimeEntryPref" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserTimeEntryPrefs">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CoID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="CoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceTypes_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="PriceTypes" Type="Self.PriceType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CoID" />
+            </Principal>
+            <Dependent Role="PriceTypes">
+              <PropertyRef Name="CoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Currencies">
+          <End Role="Currencies" Type="Self.Currency" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="CurrencyId" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projects_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeEntries_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="TimeEntries" Type="Self.TimeEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="TimeEntries">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTimeEntryPrefs_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="UserTimeEntryPrefs" Type="Self.UserTimeEntryPref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="UserTimeEntryPrefs">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeEntries_PriceTypes">
+          <End Role="PriceTypes" Type="Self.PriceType" Multiplicity="1" />
+          <End Role="TimeEntries" Type="Self.TimeEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriceTypes">
+              <PropertyRef Name="PriceTypeId" />
+            </Principal>
+            <Dependent Role="TimeEntries">
+              <PropertyRef Name="PriceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTimeEntryPrefs_PriceTypes">
+          <End Role="PriceTypes" Type="Self.PriceType" Multiplicity="0..1" />
+          <End Role="UserTimeEntryPrefs" Type="Self.UserTimeEntryPref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriceTypes">
+              <PropertyRef Name="PriceTypeId" />
+            </Principal>
+            <Dependent Role="UserTimeEntryPrefs">
+              <PropertyRef Name="PriceTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectPrices_Projects">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="ProjectFixedPrices" Type="Self.ProjectFixedPrice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectFixedPrices">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeEntries_Projects">
+          <End Role="Projects" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="TimeEntries" Type="Self.TimeEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="TimeEntries">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTimeEntryPrefs_Projects">
+          <End Role="Projects" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="UserTimeEntryPrefs" Type="Self.UserTimeEntryPref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="UserTimeEntryPrefs">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <Association Name="UserCompany">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Currencies" EntityType="Self.Currency" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="PriceTypes" EntityType="Self.PriceType" />
+          <EntitySet Name="ProjectFixedPrices" EntityType="Self.ProjectFixedPrice" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="TimeEntries" EntityType="Self.TimeEntry" />
+          <EntitySet Name="UserTimeEntryPrefs" EntityType="Self.UserTimeEntryPref" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeEntries_AspNetUsers" Association="Self.FK_TimeEntries_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TimeEntries" EntitySet="TimeEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTimeEntryPrefs_AspNetUsers" Association="Self.FK_UserTimeEntryPrefs_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserTimeEntryPrefs" EntitySet="UserTimeEntryPrefs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Company" Association="Self.FK_Customers_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceTypes_Company" Association="Self.FK_PriceTypes_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="PriceTypes" EntitySet="PriceTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Currencies" Association="Self.FK_Customers_Currencies">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projects_Customers" Association="Self.FK_Projects_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeEntries_Customers" Association="Self.FK_TimeEntries_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="TimeEntries" EntitySet="TimeEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTimeEntryPrefs_Customers" Association="Self.FK_UserTimeEntryPrefs_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="UserTimeEntryPrefs" EntitySet="UserTimeEntryPrefs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeEntries_PriceTypes" Association="Self.FK_TimeEntries_PriceTypes">
+            <End Role="PriceTypes" EntitySet="PriceTypes" />
+            <End Role="TimeEntries" EntitySet="TimeEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTimeEntryPrefs_PriceTypes" Association="Self.FK_UserTimeEntryPrefs_PriceTypes">
+            <End Role="PriceTypes" EntitySet="PriceTypes" />
+            <End Role="UserTimeEntryPrefs" EntitySet="UserTimeEntryPrefs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectPrices_Projects" Association="Self.FK_ProjectPrices_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectFixedPrices" EntitySet="ProjectFixedPrices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeEntries_Projects" Association="Self.FK_TimeEntries_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="TimeEntries" EntitySet="TimeEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTimeEntryPrefs_Projects" Association="Self.FK_UserTimeEntryPrefs_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="UserTimeEntryPrefs" EntitySet="UserTimeEntryPrefs" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="UserCompany" Association="Self.UserCompany">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TidredRepoStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Tidred.Repo.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="Tidred.Repo.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="Tidred.Repo.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Tidred.Repo.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="Tidred.Repo.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="CoID" ColumnName="CoID" />
+                <ScalarProperty Name="CoName" ColumnName="CoName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="Tidred.Repo.Currency">
+              <MappingFragment StoreEntitySet="Currencies">
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="Tidred.Repo.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="CoID" ColumnName="CoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriceTypes">
+            <EntityTypeMapping TypeName="Tidred.Repo.PriceType">
+              <MappingFragment StoreEntitySet="PriceTypes">
+                <ScalarProperty Name="PriceTypeId" ColumnName="PriceTypeId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CoID" ColumnName="CoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectFixedPrices">
+            <EntityTypeMapping TypeName="Tidred.Repo.ProjectFixedPrice">
+              <MappingFragment StoreEntitySet="ProjectFixedPrices">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="Tidred.Repo.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeEntries">
+            <EntityTypeMapping TypeName="Tidred.Repo.TimeEntry">
+              <MappingFragment StoreEntitySet="TimeEntries">
+                <ScalarProperty Name="TimeEntryId" ColumnName="TimeEntryId" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="PriceTypeId" ColumnName="PriceTypeId" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTimeEntryPrefs">
+            <EntityTypeMapping TypeName="Tidred.Repo.UserTimeEntryPref">
+              <MappingFragment StoreEntitySet="UserTimeEntryPrefs">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="PriceTypeId" ColumnName="PriceTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Tidred.Repo.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserCompany" TypeName="Tidred.Repo.UserCompany" StoreEntitySet="UserCompany">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Company">
+              <ScalarProperty Name="CoID" ColumnName="CoId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
