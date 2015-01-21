@@ -90,6 +90,8 @@ namespace Tidred.WebApp.Controllers
             var userRepo = RepoFactory.Instance.CreateUserRepo();
 
             var user = userRepo.GetUser(User.Identity.GetUserId());
+            model.UserId = user.UserId;
+            model.CoId = user.CoId;
 
             var customers = customerRepo.GetAllCustomers(user.CoId).ToList();
             model.Customers = new SelectList(customers, "CustomerId", "Name");

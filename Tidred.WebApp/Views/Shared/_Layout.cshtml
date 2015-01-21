@@ -6,7 +6,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/datepicker3.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -16,6 +16,7 @@
         var urlLogoff = Url.Action("LogOff", "User");
         var urlChangePassword = Url.Action("Manage", "User");
         var urlDemo = Url.Action("Index", "Demo");
+        var urlStat = Url.Action("Index", "Report");
     }
 
     <div class="navbar navbar-inverse navbar-static-top">
@@ -26,26 +27,34 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("TIDRED", "Index", "Time", null, new { @class = "navbar-brand" })
+                @*@Html.ActionLink("TIDRED", "Index", "Time", null, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse" align="center">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-left">
                     <li>
                         <a href="@urlTimeIndex">
-                            <img src="~/Content/tidred/Clock.jpg" width="120" height="120" />
-                            <br />TID
+                            <img src="~/Content/tidred/Clock2.jpg" width="120" height="120" />
+                            <p>TIDRED</p>
                         </a>
                     </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="@urlTimeIndex">
-                            <img src="~/Content/tidred/Demo.jpg" width="120" height="120" />
-                            <br />STAT
+                        <a href="@urlStat">
+                            <img src="~/Content/tidred/Report.jpg" width="120" height="120" />
+                            <p>STAT</p>
                         </a>
                     </li>
                     <li>
                         <a href="@urlAdminIndex">
                             <img src="~/Content/tidred/Admin.jpg" width="120" height="120" />
-                            <br />ADMIN
+                            <p>ADMIN</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@urlDemo">
+                            <img src="~/Content/tidred/Demo.jpg" width="120" height="120" />
+                            <p>DEMO</p>
                         </a>
                     </li>
                     <li class="dropdown">
@@ -77,12 +86,19 @@
 
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/tidred/account.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
 
-    @*<script>
-            $.datepicker.setDefaults({
-                dateFormat: 'yy-mm-dd'
+    <script>
+        $(function () {
+            $(".datepicker").datepicker(
+            {
+                format: "yyyy-mm-dd",
+                weekStart: 1,
+                orientation: "top"
             });
-        </script>*@
+        });
+    </script>
+
 
     @RenderSection("scripts", required: false)
 

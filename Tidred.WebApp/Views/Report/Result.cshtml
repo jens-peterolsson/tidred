@@ -4,3 +4,23 @@
     ViewBag.Title = "Result";
 }
 
+@using (Html.BeginForm("ProcessSelection", "Report"))
+{
+    @Html.Partial("Selection", Model)
+}
+
+<h3>Resultat</h3>
+@Html.ValidationSummary(true)
+<table class="table table-striped">
+    @foreach (var item in Model.Result)
+    {
+        <tr>
+            <td>
+                @item.Key
+            </td>
+            <td>
+                @item.Value
+            </td>
+        </tr>
+    }
+</table>
