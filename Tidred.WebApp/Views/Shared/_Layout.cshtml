@@ -6,7 +6,14 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
     <link href="~/Content/datepicker3.css" rel="stylesheet" />
+    @if (IsSectionDefined("PartialHead"))
+    {
+        @RenderSection("PartialHead", required: false)
+    }
 </head>
 <body>
 
@@ -64,8 +71,8 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="@urlLogoff" class="ui-menu-item">Logga ut</a></li>
-                            <li><a href="@urlChangePassword" class="ui-menu-item">Byt lösenord</a></li>
+                            <li><a href="@urlLogoff">Logga ut</a></li>
+                            <li><a href="@urlChangePassword">Byt lösenord</a></li>
                         </ul>
                     </li>
                 </ul>

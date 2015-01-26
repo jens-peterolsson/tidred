@@ -66,7 +66,7 @@ namespace Tidred.Services
 
             var noOfHours = projectEntries.Sum(entry => entry.Hours);
 
-            decimal amount = 0;
+            decimal amount;
             if (project.IsFixedPrice)
             {
                 amount = project.ProjectFixedPrice.Price;
@@ -76,16 +76,20 @@ namespace Tidred.Services
                 amount = projectEntries.Sum(entry => entry.Hours * (entry.Rate ?? 0));
             }
 
-            var perHour = amount / noOfHours;
+            decimal perHour = 0;
+            if(noOfHours != 0)
+            {
+                perHour = amount / noOfHours;
+            }
 
             var result = new Dictionary<string, string>
-        {
-          {ReportConstants.Project, project.Name},
-          {ReportConstants.Customer, project.Customer.Name},
-          {ReportConstants.TotalAmount, string.Format(FormatWithoutDecimals,  amount)},
-          {ReportConstants.TotalNoOfHours, string.Format(FormatWithDecimals,  noOfHours)},
-          {ReportConstants.AmountPerHour, string.Format(FormatWithoutDecimals,  perHour)}
-        };
+            {
+              {ReportConstants.Project, project.Name},
+              {ReportConstants.Customer, project.Customer.Name},
+              {ReportConstants.TotalAmount, string.Format(FormatWithoutDecimals, amount)},
+              {ReportConstants.TotalNoOfHours, string.Format(FormatWithDecimals, noOfHours)},
+              {ReportConstants.AmountPerHour, string.Format(FormatWithoutDecimals, perHour)}
+            };
 
             AddDateSelection(startDate, endDate, result);
 

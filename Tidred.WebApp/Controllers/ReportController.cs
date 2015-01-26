@@ -98,9 +98,13 @@ namespace Tidred.WebApp.Controllers
             var projects = projectRepo.GetAllProjects(user.CoId).ToList();
             model.Projects = new SelectList(projects, "ProjectId", "Name");
 
+            if (model.StartDate == DateTime.MinValue)
+            {
+                model.StartDate = new DateTime(DateTime.Now.Year, 1, 1);
+            }
             if (model.EndDate == DateTime.MinValue)
             {
-                model.EndDate = DateTime.MaxValue;
+                model.EndDate = new DateTime(DateTime.Now.Year, 12, 31);
             }
 
             return model;

@@ -9,8 +9,8 @@
     @Html.Partial("Selection", Model)
 }
 
-<h3>Resultat</h3>
 @Html.ValidationSummary(true)
+
 <table class="table table-striped">
     @foreach (var item in Model.Result)
     {

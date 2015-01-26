@@ -48,3 +48,36 @@ var authenticateUser = function(userName, pass, returnUrl) {
     });
 
 }; 
+
+var logOff = function () {
+
+    $.ajax({
+        type: 'POST',
+        url: '/api/account/logout',
+        headers: getAccountHeader()
+    }).done(function (data) {
+        sessionStorage.removeItem("userToken");
+        sessionStorage.removeItem("userName");
+        sessionStorage.removeItem("userId");
+        sessionStorage.removeItem("coId");
+        window.location.href = "/";
+    }).fail(function (err) {
+        alert("Error! " + err.responseText);
+    });
+
+};
+
+var changePassword = function (oldPassword, newPassword, confirmPassword) {
+
+    $.ajax({
+        type: 'POST',
+        url: '/api/account/ChangePassword',
+        headers: getAccountHeader(),
+        data: { oldPassword: oldPassword, newPassword: newPassword, confirmPassword: confirmPassword }
+    }).done(function (data) {
+        alert("Password changed.");
+    }).fail(function (err) {
+        alert(err.responseText);
+    });
+
+};

@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Admin";
+}
+
+@section PartialHead
+{
+    <script src="~/appAdmin/adminApp.js"></script>
+    <script src="~/appAdmin/adminController.js"></script>
+    <script src="~/appAdmin/adminService.js"></script>
+}
+
+<h2>ADMIN</h2>
+
+<div ng-app="adminApp" class="container">
+    <div ng-controller="adminController">
+        <ul class="nav navbar-nav navbar-left">
+            <li>
+                <a href="{{urlUser}}">
+                    <img src="~/Content/tidred/User.jpg" width="120" height="120" />
+                    <p>USERS</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{urlProject}}">
+                    <img src="~/Content/tidred/Project.jpg" width="120" height="120" />
+                    <p>PROJECTS</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{urlCustomer}}">
+                    <img src="~/Content/tidred/Customer.jpg" width="120" height="120" />
+                    <p>CUSTOMERS</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
