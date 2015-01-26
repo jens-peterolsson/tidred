@@ -1,4 +1,4 @@
-﻿adminApp.controller('adminController', ["$scope", "adminService", "urls",
+﻿adminApp.controller('userController', ["$scope", "adminService", "urls",
     function ($scope, adminService, urls) {
         $scope.urls = urls;
     }]);

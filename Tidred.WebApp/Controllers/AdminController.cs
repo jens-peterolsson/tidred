@@ -15,5 +15,21 @@ namespace Tidred.WebApp.Controllers
         {
             return View();
         }
-	}
+
+        public ActionResult UserPartial()
+        {
+            return PartialView();
+        }
+
+        public ActionResult ProjectPartial()
+        {
+            return PartialView();
+        }
+
+        public ActionResult CustomerPartial()
+        {
+            return PartialView();
+        }
+
+    }
 }
