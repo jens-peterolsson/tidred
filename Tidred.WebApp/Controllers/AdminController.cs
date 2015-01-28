@@ -31,5 +31,10 @@ namespace Tidred.WebApp.Controllers
             return PartialView();
         }
 
+        public ActionResult CustomerEditPartial()
+        {
+            return PartialView();
+        }
+
     }
 }

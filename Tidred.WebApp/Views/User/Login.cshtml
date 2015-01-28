@@ -47,7 +47,7 @@
             var userName = $("#UserName").val();
             var pass = $("#Password").val();
             var returnUrl = "@ViewBag.ReturnUrl";
-            authenticateUser(userName, pass, returnUrl);
+            accountHandler.authenticateUser(userName, pass, returnUrl);
         });
     </script>
 }

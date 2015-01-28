@@ -10,5 +10,6 @@ namespace Tidred.Repo
     {
         IEnumerable<Customer> GetAllCustomers(int coId);
         Customer GetCustomer(long customerId);
+        IEnumerable<Currency> GetAllCurrencies();
     }
 }

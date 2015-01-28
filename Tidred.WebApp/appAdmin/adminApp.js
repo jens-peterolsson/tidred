@@ -2,13 +2,14 @@
     .constant("urls", {
         "user": "/adminApp/user",
         "project": "/adminApp/project",
-        "customer": "/adminApp/customer"
+        "customer": "/adminApp/customer",
+        "customerEdit": "/adminApp/customer/edit",
+        "customerCreate": "/adminApp/customer/create"
     }
 );
 
 adminApp.config(["$routeProvider", "urls", function($routeProvider, urls) {
 
-    // "/adminApp/projects/:id" för att skicka argument id i routingen... kräver $routeParams för controller
     $routeProvider
         .when(urls.user, {
             templateUrl: "/Admin/UserPartial",
@@ -21,6 +22,14 @@ adminApp.config(["$routeProvider", "urls", function($routeProvider, urls) {
         .when(urls.customer, {
             templateUrl: "/Admin/CustomerPartial",
             controller: "customerController"
+        })
+        .when(urls.customerEdit, {
+            templateUrl: "/Admin/CustomerEditPartial",
+            controller: "customerEditController"
+        })
+        .when(urls.customerCreate, {
+            templateUrl: "/Admin/CustomerEditPartial",
+            controller: "customerEditController"
         })
     //    .otherwise({
     //        redirectTo: "/"

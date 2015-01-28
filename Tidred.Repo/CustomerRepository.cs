@@ -16,5 +16,11 @@ namespace Tidred.Repo
         {
             return _context.Customers.SingleOrDefault(c => c.CustomerId == customerId);
         }
+
+        public IEnumerable<Currency> GetAllCurrencies()
+        {
+            return _context.Currencies; ;
+        }
+
     }
 }

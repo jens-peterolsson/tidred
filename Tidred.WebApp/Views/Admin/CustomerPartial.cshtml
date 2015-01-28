@@ -1,1 +1,22 @@
-﻿
+﻿<div ng-controller="customerController">
+    <h2>CUSTOMERS</h2>
+    <div class="row">
+        <p>
+            <a href="#{{urls.customerCreate}}">NEW CUSTOMER</a>
+        </p>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th class="col-md-2">Id</th>
+            <th class="col-md-5">Name</th>
+            <th class="col-md-3">Currency</th>
+            <th class="col-md-2"></th>
+        </tr>
+        <tr ng-repeat="customer in customers">
+            <td>{{customer.customerId}}</td>
+            <td>{{customer.name}}</td>
+            <td>{{customer.currencyName}}</td>
+            <td ng-click="setCustomer(customer)"><a href="#{{urls.customerEdit}}">EDIT</a></td>
+        </tr>
+    </table>
+</div>
