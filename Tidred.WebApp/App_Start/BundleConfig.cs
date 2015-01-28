@@ -28,7 +28,26 @@ namespace Tidred.WebApp
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/datepicker3.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/tidred").Include(
+                      "~/Scripts/tidred/account.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                      "~/Scripts/angular.js",
+                      "~/Scripts/angular-route.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/appAdmin").Include(
+                      "~/appAdmin/adminApp.js",
+                      "~/appAdmin/adminService.js",
+                      "~/appAdmin/adminController.js",
+                      "~/appAdmin/customerController.js",
+                      "~/appAdmin/customerEditController.js",
+                      "~/appAdmin/projectController.js",
+                      "~/appAdmin/projectEditController.js",
+                      "~/appAdmin/userController.js",
+                      "~/appAdmin/userCreateController.js"));
         }
     }
 }

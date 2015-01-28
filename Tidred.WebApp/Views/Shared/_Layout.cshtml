@@ -4,13 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script src="~/Scripts/tidred/account.js"></script>
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/angular-route.min.js"></script>
-    <script src="~/appAdmin/adminApp.js"></script>
-    <link href="~/Content/datepicker3.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/tidred")
+    @Scripts.Render("~/bundles/angular")
+
     @if (IsSectionDefined("PartialHead"))
     {
         @RenderSection("PartialHead", required: false)
