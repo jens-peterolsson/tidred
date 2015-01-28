@@ -7,7 +7,7 @@ using Tidred.Repo;
 
 namespace Tidred.Tests.Mocks
 {
-  public class TimeRepo : BaseRepo<TimeEntry>, ITimeRepository
+  public class TimeRepo : BaseRepoMock<TimeEntry>, ITimeRepository
   {
     public IEnumerable<TimeEntry> GetAllEntries(string userId)
     {

@@ -66,6 +66,7 @@
 
         $http(request)
             .then(function () {
+                service.selectedCustomer = {};
                 getCustomers();
             }
         );
@@ -142,6 +143,7 @@
 
         $http(request)
             .then(function () {
+                service.selectedProject = {};
                 getProjects();
             }
         );
@@ -163,6 +165,7 @@
 
         $http(request)
             .then(function () {
+                service.newUser = {};
                 getUsers();
             }, function (err) {
                 service.updateError = err.data.message;

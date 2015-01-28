@@ -23,9 +23,9 @@ namespace Tidred.Repo
             return projectFixedPrices;
         }
 
-        public ProjectFixedPrice GetProjectFixedPrice(long projectId)
+        public ProjectFixedPrice GetProjectFixedPriceWithoutTracking(long projectId)
         {
-            return _context.ProjectFixedPrices.SingleOrDefault(p => p.ProjectId == projectId);
+            return _context.ProjectFixedPrices.AsNoTracking().SingleOrDefault(p => p.ProjectId == projectId);
         }
 
     }

@@ -7,7 +7,7 @@ using Tidred.Repo;
 
 namespace Tidred.Tests.Mocks
 {
-    public class ProjectRepo : IProjectRepository
+    public class ProjectRepo : BaseRepoMock<Project>, IProjectRepository
     {
         public Project GetProject(long projectId)
         {

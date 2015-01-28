@@ -1,1 +1,25 @@
-﻿
+﻿<div ng-controller="projectController">
+    <h2>PROJECTS</h2>
+    <div class="row">
+        <p>
+            <a href="#{{urls.projectCreate}}">NEW PROJECT</a>
+        </p>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th class="col-md-2">Id</th>
+            <th class="col-md-3">Name</th>
+            <th class="col-md-3">Customer</th>
+            <th class="col-md-2">Fixed Price</th>
+            <th class="col-md-2"></th>
+        </tr>
+        <tr ng-repeat="project in projects">
+            <td>{{project.projectId}}</td>
+            <td>{{project.name}}</td>
+            <td>{{project.customerName}}</td>
+            <td>{{project.fixedPrice | number:0}}</td>
+            <td ng-click="setProject(project)"><a href="#{{urls.projectEdit}}">EDIT</a></td>
+        </tr>
+    </table>
+</div>
+

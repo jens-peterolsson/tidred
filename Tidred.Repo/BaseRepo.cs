@@ -41,7 +41,10 @@ namespace Tidred.Repo
             using (var context = new TidredContext())
             {
                 context.Set<T>().Attach(entity);
-                context.Entry(entity).State = EntityState.Modified;
+
+                var entry = context.Entry(entity);
+                entry.State = EntityState.Modified;
+                
                 context.SaveChanges();
             }
         }

@@ -25,7 +25,7 @@ namespace Tidred.WebApp.Controllers.ApiData
 
             var result = repo.GetAllProjects(coId.Value).Select(p => 
                 new ProjectData { CustomerId = p.CustomerId, ProjectId = p.ProjectId,
-                    Name = p.Name, FixedPrice = GetFixedPrice(p)});
+                    Name = p.Name, CustomerName = p.Customer.Name, FixedPrice = GetFixedPrice(p)});
 
             return result;
         }
@@ -44,7 +44,7 @@ namespace Tidred.WebApp.Controllers.ApiData
             {
                 ProjectId = projectData.ProjectId,
                 Name = projectData.Name,
-                CustomerId = projectData.ProjectId
+                CustomerId = projectData.CustomerId
             };
 
             if(!ValidateProject(project)) {
@@ -54,7 +54,6 @@ namespace Tidred.WebApp.Controllers.ApiData
             if (project.ProjectId > 0)
             {
                 repo.Update(project);
-                
             }
             else
             {
@@ -83,19 +82,21 @@ namespace Tidred.WebApp.Controllers.ApiData
         {
             var fixedRepo = RepoFactory.Instance.CreateProjectFixedPriceRepo();
 
-            if (projectData.FixedPrice > 0)
-            {
-                var fixedProject = fixedRepo.GetProjectFixedPrice(projectData.ProjectId);
-                if (fixedProject != null && fixedProject.Price != projectData.FixedPrice)
-                {
-                    fixedProject.Price = projectData.FixedPrice;
-                    fixedRepo.Update(fixedProject);
-                    return;
-                }
+            if (projectData.FixedPrice <= 0) return;
 
-                fixedProject = new ProjectFixedPrice {ProjectId = projectData.ProjectId, Price = projectData.FixedPrice};
+            var fixedProject = fixedRepo.GetProjectFixedPriceWithoutTracking(projectData.ProjectId);
+            if (fixedProject == null)
+            {
+                fixedProject = new ProjectFixedPrice { ProjectId = projectData.ProjectId, Price = projectData.FixedPrice };
                 fixedRepo.Create(fixedProject);
+
+                return;
             }
+
+            if (fixedProject.Price == projectData.FixedPrice) return;
+
+            fixedProject.Price = projectData.FixedPrice;
+            fixedRepo.Update(fixedProject);
         }
 
         [Route("PriceTypes")]
