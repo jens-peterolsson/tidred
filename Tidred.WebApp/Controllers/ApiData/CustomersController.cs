@@ -43,6 +43,11 @@ namespace Tidred.WebApp.Controllers.ApiData
                 ModelState.AddModelError("Name", "Name is required.");
             }
 
+            if (!ModelState.IsValid)
+            {
+                return;
+            }
+
             if (customer.CustomerId > 0)
             {
                 repo.Update(customer);

@@ -191,6 +191,10 @@
     <Compile Include="Controllers\ApiData\CustomersController.cs" />
     <Compile Include="Controllers\ApiData\Dto\CurrencyData.cs" />
     <Compile Include="Controllers\ApiData\Dto\CustomerData.cs" />
+    <Compile Include="Controllers\ApiData\Dto\PriceTypeData.cs" />
+    <Compile Include="Controllers\ApiData\Dto\ProjectData.cs" />
+    <Compile Include="Controllers\ApiData\ProjectsController.cs" />
+    <Compile Include="Controllers\ApiData\UsersController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\TimeController.cs" />
@@ -210,7 +214,9 @@
     <Content Include="appAdmin\adminApp.js" />
     <Content Include="appAdmin\customerEditController.js" />
     <Content Include="appAdmin\customerController.js" />
+    <Content Include="appAdmin\projectEditController.js" />
     <Content Include="appAdmin\projectController.js" />
+    <Content Include="appAdmin\userCreateController.js" />
     <Content Include="appAdmin\userController.js" />
     <Content Include="appAdmin\adminController.js" />
     <Content Include="appAdmin\adminService.js" />
@@ -1126,6 +1132,8 @@
     <Content Include="Views\Admin\ProjectPartial.cshtml" />
     <Content Include="Views\Admin\CustomerPartial.cshtml" />
     <Content Include="Views\Admin\CustomerEditPartial.cshtml" />
+    <Content Include="Views\Admin\UserCreatePartial.cshtml" />
+    <Content Include="Views\Admin\ProjectEditPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="appTime\" />

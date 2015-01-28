@@ -1,0 +1,27 @@
+﻿<div ng-controller="userCreateController">
+    <form role="form" name="userCreateForm" novalidate data-ng-submit="setUser()">
+
+        <div class="form-group" data-ng-class="{'has-error':!userCreateForm.userName.$valid}">
+            <label for="userName">User Name</label>
+            <input class="form-control" type="text" name="userName" placeholder="Enter name" required="" data-ng-model="userName" />
+            <span class="help-block" data-ng-show="myForm.userName.$error.required">Username is required.</span>
+        </div>
+
+        <div class="form-group" data-ng-class="{'has-error':!userCreateForm.password.$valid}">
+            <label for="password">Password</label>
+            <input class="form-control" type="password" name="password" required data-ng-model="password" />
+            <span class="help-block" data-ng-show="myForm.password.$error.required">Password is required.</span>
+        </div>
+
+        <div class="form-group" data-ng-class="{'has-error':!userCreateForm.confirmPassword.$valid}">
+            <label for="confirmPassword">Confirm Password</label>
+            <input class="form-control" type="password" name="confirmPassword" required="" data-ng-model="confirmPassword" data-ng-match="password" />
+            <span class="help-block" data-ng-show="userCreateForm.confirmPassword.$error.required">Confirm password is required.</span>
+            <span class="help-block" data-ng-show="userCreateForm.confirmPassword.$error.match">Passwords do not match.</span>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Save" />
+        </div>
+        <span ng-show="statusMessageShow">{{statusMessage}}</span>
+    </form>
+</div>

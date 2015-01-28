@@ -338,6 +338,11 @@ namespace Tidred.WebApp.Controllers
                 return errorResult;
             }
 
+            var repo = RepoFactory.Instance.CreateUserRepo();
+            var userId = repo.GetUserId(model.UserName);
+
+            repo.AddCompany(userId, model.CoId);
+
             return Ok();
         }
 

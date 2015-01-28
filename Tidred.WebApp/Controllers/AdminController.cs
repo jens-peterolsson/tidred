@@ -21,7 +21,17 @@ namespace Tidred.WebApp.Controllers
             return PartialView();
         }
 
+        public ActionResult UserCreatePartial()
+        {
+            return PartialView();
+        }
+
         public ActionResult ProjectPartial()
+        {
+            return PartialView();
+        }
+
+        public ActionResult ProjectEditPartial()
         {
             return PartialView();
         }

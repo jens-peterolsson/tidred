@@ -22,5 +22,33 @@ namespace Tidred.Repo
             return result;
         }
 
+        public string GetUserId(string userName)
+        {
+            var userId = _context.AspNetUsers.Single(u => u.UserName == userName).Id;
+
+            return userId;
+        }
+
+        public IEnumerable<User> GetUsers(int coId)
+        {
+            var users = _context.AspNetUsers.Where(u => u.Company.CoID == coId)
+                .Select(user => new User
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName,
+                    CoId = user.Company.CoID
+                });
+
+            return users;
+        }
+
+        public void AddCompany(string userId, int coId)
+        {
+            var accountUser = _context.AspNetUsers.Single(u => u.Id == userId);
+            accountUser.Company = _context.Companies.Single(c => c.CoID == coId);
+
+            _context.SaveChanges();
+        }
+
     }
 }

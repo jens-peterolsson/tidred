@@ -4,8 +4,14 @@
 
     service.coId = accountHandler.getUserInfo().coId;
     service.customers = [];
+    service.projects = [];
+    service.priceTypes = [];
+    service.users = [];
     service.currencies = [];
     service.selectedCustomer = {};
+    service.selectedProject = {};
+    service.newUser = {};
+    service.updateError = "";
 
     function getCurrencies() {
 
@@ -66,8 +72,112 @@
 
     };
 
+    function getPriceTypes() {
+
+        var headerInfo = accountHandler.getAccountHeader();
+
+        var request = {
+            method: "GET",
+            url: "api/projects/pricetypes",
+            headers: headerInfo,
+            params: { coId: service.coId }
+        };
+
+        $http(request)
+            .then(function (result) {
+                service.priceTypes = result.data;
+                $rootScope.$broadcast("priceTypeUpdate");
+            }
+        );
+    }
+
+    function getUsers() {
+
+        var headerInfo = accountHandler.getAccountHeader();
+
+        var request = {
+            method: "GET",
+            url: "api/users",
+            headers: headerInfo,
+            params: { coId: service.coId }
+        };
+
+        $http(request)
+            .then(function (result) {
+                service.users = result.data;
+                $rootScope.$broadcast("userUpdate");
+            }
+        );
+    }
+
+    function getProjects() {
+
+        var headerInfo = accountHandler.getAccountHeader();
+
+        var request = {
+            method: "GET",
+            url: "api/projects",
+            headers: headerInfo,
+            params: { coId: service.coId }
+        };
+
+        $http(request)
+            .then(function (result) {
+                service.projects = result.data;
+                $rootScope.$broadcast("projectUpdate");
+            }
+        );
+    }
+
+    service.saveProject = function () {
+
+        var headerInfo = accountHandler.getAccountHeader();
+
+        var request = {
+            method: "POST",
+            url: "api/projects",
+            headers: headerInfo,
+            data: service.selectedProject
+        };
+
+        $http(request)
+            .then(function () {
+                getProjects();
+            }
+        );
+
+    };
+
+    service.saveUser = function () {
+
+        service.newUser.coId = service.coId;
+
+        var headerInfo = accountHandler.getAccountHeader();
+
+        var request = {
+            method: "POST",
+            url: "api/account/register",
+            headers: headerInfo,
+            data: service.newUser
+        };
+
+        $http(request)
+            .then(function () {
+                getUsers();
+            }, function (err) {
+                service.updateError = err.data.message;
+                $rootScope.$broadcast("updateError");
+            }
+        );
+
+    };
+
+
     getCustomers();
     getCurrencies();
+    getProjects();
+    getPriceTypes();
+    getUsers();
 
     return service;
 

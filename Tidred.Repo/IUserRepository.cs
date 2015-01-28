@@ -9,5 +9,8 @@ namespace Tidred.Repo
     public interface IUserRepository
     {
         User GetUser(string userId);
+        IEnumerable<User> GetUsers(int coId);
+        void AddCompany(string userId, int coId);
+        string GetUserId(string userName);
     }
 }
