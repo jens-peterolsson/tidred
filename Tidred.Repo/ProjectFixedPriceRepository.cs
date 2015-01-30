@@ -8,14 +8,12 @@ namespace Tidred.Repo
 {
     public class ProjectFixedPriceRepository : BaseRepo<ProjectFixedPrice>, IProjectFixedPriceRepository
     {
-        private readonly TidredContext _context = new TidredContext();
-
         public IEnumerable<ProjectFixedPrice> GetProjectFixedPrices(int coId)
         {
-            var projectFixedPrices = from projectFixedPrice in _context.ProjectFixedPrices
-                                     join project in _context.Projects
+            var projectFixedPrices = from projectFixedPrice in Context.ProjectFixedPrices
+                                     join project in Context.Projects
                                      on projectFixedPrice.ProjectId equals project.ProjectId
-                                     join customer in _context.Customers
+                                     join customer in Context.Customers
                                      on project.CustomerId equals customer.CustomerId
                                      where customer.CoID == coId
                                      select projectFixedPrice;
@@ -23,9 +21,9 @@ namespace Tidred.Repo
             return projectFixedPrices;
         }
 
-        public ProjectFixedPrice GetProjectFixedPriceWithoutTracking(long projectId)
+        public ProjectFixedPrice GetProjectFixedPrice(long projectId)
         {
-            return _context.ProjectFixedPrices.AsNoTracking().SingleOrDefault(p => p.ProjectId == projectId);
+            return Context.ProjectFixedPrices.SingleOrDefault(p => p.ProjectId == projectId);
         }
 
     }

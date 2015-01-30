@@ -1,5 +1,5 @@
-﻿adminApp.controller('userCreateController', ["$scope", "adminService", "$timeout",
-    function ($scope, adminService, $timeout) {
+﻿adminApp.controller('userCreateController', ["$scope", "adminService", "$timeout", "urls", "$location",
+    function ($scope, adminService, $timeout, urls, $location) {
 
         $scope.$on('userUpdate', function () {
             $scope.users = adminService.users;
@@ -22,12 +22,13 @@
             adminService.saveUser();
         };
 
-        $scope.$on('userUpdate', function () {
-            $scope.statusMessage = "User updated.";
-            $scope.statusMessageShow = true;
-            $timeout(function () {
-                $scope.statusMessageShow = false;
-            }, 1200);
+        $scope.cancel = function () {
+            adminService.selectedUser = {};
+            $location.path(urls.user);
+        };
+
+        $scope.$on('userSaved', function () {
+            $location.path(urls.user);
         });
 
         $scope.$on('updateError', function () {

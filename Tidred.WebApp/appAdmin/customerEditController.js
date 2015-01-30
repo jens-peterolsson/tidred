@@ -1,5 +1,5 @@
-﻿adminApp.controller('customerEditController', ["$scope", "adminService", "urls", "$timeout",
-    function ($scope, adminService, urls, $timeout) {
+﻿adminApp.controller('customerEditController', ["$scope", "adminService", "urls", "$location",
+    function ($scope, adminService, urls, $location) {
 
         $scope.urls = urls;
         $scope.currencies = adminService.currencies;
@@ -12,12 +12,13 @@
             }
         };
 
-        $scope.$on('customerUpdate', function () {
-            $scope.statusMessage = "Customer updated.";
-            $scope.statusMessageShow = true;
-            $timeout(function() {
-                $scope.statusMessageShow = false;
-            }, 1200);
+        $scope.cancel = function () {
+            adminService.selectedCustomer = {};
+            $location.path(urls.customer);
+        };
+
+        $scope.$on('customerSaved', function () {
+            $location.path(urls.customer);
         });
 
     }]);

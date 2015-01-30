@@ -8,26 +8,29 @@ namespace Tidred.Repo
 {
     public class TimeRepository : BaseRepo<TimeEntry>, ITimeRepository
     {
-        private readonly TidredContext _context = new TidredContext();
-
         public IEnumerable<TimeEntry> GetAllEntries(string userId)
         {
-            return _context.TimeEntries.Where(e => e.UserId == userId);
+            return Context.TimeEntries.Where(e => e.UserId == userId);
         }
 
         public TimeEntry GetEntry(long id)
         {
-            return _context.TimeEntries.SingleOrDefault(e => e.TimeEntryId == id);
+            return Context.TimeEntries.SingleOrDefault(e => e.TimeEntryId == id);
+        }
+
+        public IEnumerable<PriceType> GetAllPriceTypes(int coId)
+        {
+            return Context.PriceTypes.Where(p => p.CoID == coId);
         }
 
         public IEnumerable<TimeEntry> GetAllProjectEntries(long projectId)
         {
-            return _context.TimeEntries.Where(e => e.ProjectId == projectId);
+            return Context.TimeEntries.Where(e => e.ProjectId == projectId);
         }
 
         public IEnumerable<TimeEntry> GetAllCustomerEntries(long customerId)
         {
-            return _context.TimeEntries.Where(e => e.CustomerId == customerId);
+            return Context.TimeEntries.Where(e => e.CustomerId == customerId);
         }
 
     }

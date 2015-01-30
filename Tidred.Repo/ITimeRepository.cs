@@ -12,5 +12,6 @@ namespace Tidred.Repo
         IEnumerable<TimeEntry> GetAllProjectEntries(long projectId);
         IEnumerable<TimeEntry> GetAllCustomerEntries(long customerId);
         TimeEntry GetEntry(long id);
+        IEnumerable<PriceType> GetAllPriceTypes(int coId);
     }
 }

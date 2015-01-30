@@ -8,11 +8,9 @@ namespace Tidred.Repo
 {
     public class UserRepository : BaseRepo<User>, IUserRepository
     {
-        private readonly TidredContext _context = new TidredContext();
-
         public User GetUser(string userId)
         {
-            var user = _context.AspNetUsers.Single(u => u.Id == userId);
+            var user = Context.AspNetUsers.Single(u => u.Id == userId);
             var result = new User()
             {
                 UserId = userId,
@@ -24,14 +22,14 @@ namespace Tidred.Repo
 
         public string GetUserId(string userName)
         {
-            var userId = _context.AspNetUsers.Single(u => u.UserName == userName).Id;
+            var userId = Context.AspNetUsers.Single(u => u.UserName == userName).Id;
 
             return userId;
         }
 
         public IEnumerable<User> GetUsers(int coId)
         {
-            var users = _context.AspNetUsers.Where(u => u.Company.CoID == coId)
+            var users = Context.AspNetUsers.Where(u => u.Company.CoID == coId)
                 .Select(user => new User
                 {
                     UserId = user.Id,
@@ -44,10 +42,10 @@ namespace Tidred.Repo
 
         public void AddCompany(string userId, int coId)
         {
-            var accountUser = _context.AspNetUsers.Single(u => u.Id == userId);
-            accountUser.Company = _context.Companies.Single(c => c.CoID == coId);
+            var accountUser = Context.AspNetUsers.Single(u => u.Id == userId);
+            accountUser.Company = Context.Companies.Single(c => c.CoID == coId);
 
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
 
     }

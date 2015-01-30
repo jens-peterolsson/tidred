@@ -1,5 +1,5 @@
-﻿adminApp.controller('projectEditController', ["$scope", "adminService", "urls", "$timeout",
-    function ($scope, adminService, urls, $timeout) {
+﻿adminApp.controller('projectEditController', ["$scope", "adminService", "urls", "$timeout", "$location",
+    function ($scope, adminService, urls, $timeout, $location) {
 
         $scope.urls = urls;
         $scope.customers = adminService.customers;
@@ -12,13 +12,13 @@
             }
         };
 
-        $scope.$on('projectUpdate', function () {
-            $scope.statusMessage = "Project updated.";
-            $scope.statusMessageShow = true;
-            $timeout(function () {
-                $scope.statusMessageShow = false;
-            }, 1200);
-        });
+        $scope.cancel = function() {
+            adminService.selectedProject = {};
+            $location.path(urls.project);
+        };
 
+        $scope.$on('projectSaved', function () {
+            $location.path(urls.project);
+        });
 
     }]);

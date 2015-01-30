@@ -10,43 +10,33 @@ namespace Tidred.Repo
 {
     public abstract class BaseRepo<T> : IBaseRepo<T> where T : class
     {
+        protected TidredContext Context = new TidredContext();
+
         public List<T> GetAll()
         {
-            using (var context = new TidredContext())
-            {
-                return context.Set<T>().ToList();
-            }
+            return Context.Set<T>().ToList();
         }
 
         public void Create(T entity)
         {
-            using (var context = new TidredContext())
-            {
-                context.Set<T>().Add(entity);
-                context.SaveChanges();
-            }
+            Context.Set<T>().Add(entity);
+            Context.SaveChanges();
         }
 
         public void Delete(T entity)
         {
-            using (var context = new TidredContext())
-            {
-                context.Set<T>().Remove(entity);
-                context.SaveChanges();
-            }
+            Context.Set<T>().Remove(entity);
+            Context.SaveChanges();
         }
 
         public void Update(T entity)
         {
-            using (var context = new TidredContext())
-            {
-                context.Set<T>().Attach(entity);
+            Context.Set<T>().Attach(entity);
 
-                var entry = context.Entry(entity);
-                entry.State = EntityState.Modified;
-                
-                context.SaveChanges();
-            }
+            var entry = Context.Entry(entity);
+            entry.State = EntityState.Modified;
+
+            Context.SaveChanges();
         }
     }
 }

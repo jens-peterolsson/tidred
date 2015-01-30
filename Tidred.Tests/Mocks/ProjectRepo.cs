@@ -29,7 +29,9 @@ namespace Tidred.Tests.Mocks
             return result;
         }
 
-        public IEnumerable<PriceType> GetAllPriceTypes(int coId)
+
+
+        public void SaveProject(Project project, long fixedPrice)
         {
             throw new NotImplementedException();
         }

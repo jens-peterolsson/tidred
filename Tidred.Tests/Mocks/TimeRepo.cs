@@ -19,6 +19,11 @@ namespace Tidred.Tests.Mocks
         return TestData.CreateTimeEntries().Where(e => e.ProjectId == projectId);
     }
 
+    public IEnumerable<PriceType> GetAllPriceTypes(int coId)
+    {
+        throw new NotImplementedException();
+    }
+
     public IEnumerable<TimeEntry> GetAllCustomerEntries(long customerId)
     {
         return TestData.CreateTimeEntries().Where(e => e.CustomerId == customerId);

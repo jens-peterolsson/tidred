@@ -51,16 +51,7 @@ namespace Tidred.WebApp.Controllers.ApiData
                 return;
             }
 
-            if (project.ProjectId > 0)
-            {
-                repo.Update(project);
-            }
-            else
-            {
-                repo.Create(project);
-            }
-
-            SaveFixedPrice(projectData);
+            repo.SaveProject(project, projectData.FixedPrice);
         }
 
         private bool ValidateProject(Project project)
@@ -76,45 +67,6 @@ namespace Tidred.WebApp.Controllers.ApiData
             }
 
             return ModelState.IsValid;
-        }
-
-        private void SaveFixedPrice(ProjectData projectData)
-        {
-            var fixedRepo = RepoFactory.Instance.CreateProjectFixedPriceRepo();
-
-            if (projectData.FixedPrice <= 0) return;
-
-            var fixedProject = fixedRepo.GetProjectFixedPriceWithoutTracking(projectData.ProjectId);
-            if (fixedProject == null)
-            {
-                fixedProject = new ProjectFixedPrice { ProjectId = projectData.ProjectId, Price = projectData.FixedPrice };
-                fixedRepo.Create(fixedProject);
-
-                return;
-            }
-
-            if (fixedProject.Price == projectData.FixedPrice) return;
-
-            fixedProject.Price = projectData.FixedPrice;
-            fixedRepo.Update(fixedProject);
-        }
-
-        [Route("PriceTypes")]
-        public IEnumerable<PriceTypeData> GetPriceTypes(int? coId)
-        {
-            if (!coId.HasValue)
-            {
-                Request.CreateErrorResponse(HttpStatusCode.BadRequest, "CoId is required.");
-                return null;
-            }
-
-            var repo = RepoFactory.Instance.CreateProjectRepo();
-            var result = repo.GetAllPriceTypes(coId.Value).Select(p => 
-                new PriceTypeData { CoId = coId.Value, PriceTypeId = p.PriceTypeId, Code = p.Code,
-                    Name = p.Name});
-
-            return result;
-
         }
 
     }

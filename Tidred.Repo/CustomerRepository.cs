@@ -5,21 +5,19 @@ namespace Tidred.Repo
 {
     public class CustomerRepository : BaseRepo<Customer>, ICustomerRepository
     {
-        private readonly TidredContext _context = new TidredContext();
-
         public IEnumerable<Customer> GetAllCustomers(int coId)
         {
-            return _context.Customers.Where(c => c.CoID == coId); ;
+            return Context.Customers.Where(c => c.CoID == coId); ;
         }
 
         public Customer GetCustomer(long customerId)
         {
-            return _context.Customers.SingleOrDefault(c => c.CustomerId == customerId);
+            return Context.Customers.SingleOrDefault(c => c.CustomerId == customerId);
         }
 
         public IEnumerable<Currency> GetAllCurrencies()
         {
-            return _context.Currencies; ;
+            return Context.Currencies; ;
         }
 
     }

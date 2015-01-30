@@ -12,6 +12,7 @@
     service.selectedProject = {};
     service.newUser = {};
     service.updateError = "";
+    service.statusMessage = "";
 
     function getCurrencies() {
 
@@ -67,6 +68,9 @@
         $http(request)
             .then(function () {
                 service.selectedCustomer = {};
+                service.statusMessage = "Customer saved.";
+                $rootScope.$broadcast("customerSaved");
+                $rootScope.$broadcast("statusUpdate");
                 getCustomers();
             }
         );
@@ -144,6 +148,9 @@
         $http(request)
             .then(function () {
                 service.selectedProject = {};
+                service.statusMessage = "Project saved.";
+                $rootScope.$broadcast("projectSaved");
+                $rootScope.$broadcast("statusUpdate");
                 getProjects();
             }
         );
@@ -166,6 +173,9 @@
         $http(request)
             .then(function () {
                 service.newUser = {};
+                service.statusMessage = "User saved.";
+                $rootScope.$broadcast("userSaved");
+                $rootScope.$broadcast("statusUpdate");
                 getUsers();
             }, function (err) {
                 service.updateError = err.data.message;
