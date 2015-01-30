@@ -48,6 +48,15 @@ namespace Tidred.WebApp
                       "~/appAdmin/projectEditController.js",
                       "~/appAdmin/userController.js",
                       "~/appAdmin/userCreateController.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/appTime").Include(
+                    "~/appTime/timeApp.js",
+                    "~/appTime/timeService.js",
+                    "~/appTime/timeController.js",
+                    "~/appTime/timeRecordController.js",
+                    "~/appTime/timeRecordEditController.js"));
+
+
         }
     }
 }

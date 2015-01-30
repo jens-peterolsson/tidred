@@ -8,6 +8,24 @@ namespace Tidred.Repo
 {
     public class TimeRepository : BaseRepo<TimeEntry>, ITimeRepository
     {
+        public IEnumerable<TimeEntry> GetEntries(string userId, DateTime startDate, DateTime endDate, long? customerId, long? projectId)
+        {
+            var entries = GetAllEntries(userId)
+                .Where(entry => entry.Day >= startDate && entry.Day <= endDate);
+
+            if (customerId.HasValue && customerId > -1)
+            {
+                entries = entries.Where(entry => entry.CustomerId == customerId.Value);
+            }
+
+            if (projectId.HasValue && projectId > 0)
+            {
+                entries = entries.Where(entry => entry.ProjectId == projectId.Value);
+            }
+
+            return entries;
+        }
+
         public IEnumerable<TimeEntry> GetAllEntries(string userId)
         {
             return Context.TimeEntries.Where(e => e.UserId == userId);

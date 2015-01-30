@@ -77,25 +77,6 @@
 
     };
 
-    function getPriceTypes() {
-
-        var headerInfo = accountHandler.getAccountHeader();
-
-        var request = {
-            method: "GET",
-            url: "api/projects/pricetypes",
-            headers: headerInfo,
-            params: { coId: service.coId }
-        };
-
-        $http(request)
-            .then(function (result) {
-                service.priceTypes = result.data;
-                $rootScope.$broadcast("priceTypeUpdate");
-            }
-        );
-    }
-
     function getUsers() {
 
         var headerInfo = accountHandler.getAccountHeader();
@@ -189,7 +170,6 @@
     getCustomers();
     getCurrencies();
     getProjects();
-    getPriceTypes();
     getUsers();
 
     return service;

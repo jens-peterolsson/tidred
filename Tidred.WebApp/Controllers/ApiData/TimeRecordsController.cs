@@ -13,6 +13,62 @@ namespace Tidred.WebApp.Controllers.ApiData
     [RoutePrefix("api/TimeRecords")]
     public class TimeRecordsController : ApiController
     {
+        public IEnumerable<Entry> Post([FromBody]EntryParams args)
+        {
+            var repo = RepoFactory.Instance.CreateTimeRepo();
+
+            var result = repo.GetEntries(args.UserId, args.Start, args.End, args.CustomerId, args.ProjectId)
+                          .OrderByDescending(entry => entry.Day)
+                          .ThenByDescending(entry => entry.TimeEntryId)
+                          .Select(t => new Entry
+                          {
+                              Id = t.TimeEntryId,
+                              ProjectId = t.ProjectId,
+                              CustomerId = t.CustomerId,
+                              Hours = t.Hours,
+                              Comment = t.Comment,
+                              Day = t.Day.ToShortDateString(),
+                              PriceTypeId = t.PriceTypeId,
+                              Rate = t.Rate
+                          })
+                          .ToList();
+
+            return result;
+        }
+
+        public void Put(TimeEntry entry)
+        {
+            var repo = RepoFactory.Instance.CreateTimeRepo();
+
+            if (entry.CustomerId <= 0)
+            {
+                ModelState.AddModelError("CustomerId", "Customer is required.");
+            }
+            if (entry.PriceTypeId <= 0)
+            {
+                ModelState.AddModelError("PriceTypeId", "Price type is required.");
+            }
+
+            if (entry.Day == DateTime.MinValue)
+            {
+                ModelState.AddModelError("Day", "Day is required.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return;
+            }
+
+            if (entry.TimeEntryId > 0)
+            {
+                repo.Update(entry);
+                return;
+            }
+
+            repo.Create(entry);
+        }
+
+
         [Route("PriceTypes")]
         public IEnumerable<PriceTypeData> GetPriceTypes(int? coId)
         {

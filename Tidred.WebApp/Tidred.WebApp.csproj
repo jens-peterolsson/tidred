@@ -191,6 +191,8 @@
     <Compile Include="Controllers\ApiData\CustomersController.cs" />
     <Compile Include="Controllers\ApiData\Dto\CurrencyData.cs" />
     <Compile Include="Controllers\ApiData\Dto\CustomerData.cs" />
+    <Compile Include="Controllers\ApiData\Dto\Entry.cs" />
+    <Compile Include="Controllers\ApiData\Dto\EntryParams.cs" />
     <Compile Include="Controllers\ApiData\Dto\PriceTypeData.cs" />
     <Compile Include="Controllers\ApiData\Dto\ProjectData.cs" />
     <Compile Include="Controllers\ApiData\ProjectsController.cs" />
@@ -221,6 +223,11 @@
     <Content Include="appAdmin\userController.js" />
     <Content Include="appAdmin\adminController.js" />
     <Content Include="appAdmin\adminService.js" />
+    <Content Include="appTime\timeService.js" />
+    <Content Include="appTime\timeRecordController.js" />
+    <Content Include="appTime\timeRecordEditController.js" />
+    <Content Include="appTime\timeApp.js" />
+    <Content Include="appTime\timeController.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -1137,7 +1144,6 @@
     <Content Include="Views\Admin\ProjectEditPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="appTime\" />
     <Folder Include="App_Data\" />
     <Folder Include="Views\Demo\" />
   </ItemGroup>

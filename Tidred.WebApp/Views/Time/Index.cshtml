@@ -1,3 +1,20 @@
-﻿<div>
-    <p>Time waits for nobody.</p>
+﻿@{
+    ViewBag.Title = "TIME";
+}
+
+@section PartialHead
+{
+    @Scripts.Render("~/bundles/appTime")
+}
+
+<h2>TIME</h2>
+
+<div ng-app="timeApp" class="container">
+    <div ng-controller="timeController">
+        <span ng-show="statusMessageShow">{{statusMessage}}</span>
+        <div ng-view></div>
+    </div>
+    <h6>...and remember - time waits for no one.</h6>
 </div>
+
+
