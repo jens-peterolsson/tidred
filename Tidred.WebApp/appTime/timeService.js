@@ -2,14 +2,17 @@
 
     var service = {};
 
-    service.coId = accountHandler.getUserInfo().coId;
+    var userInfo = accountHandler.getUserInfo();
+    service.coId = userInfo.coId;
+    service.userId = userInfo.userId;
     service.timeRecords = [];
     service.priceTypes = [];
     service.customers = [];
-    service.projectss = [];
+    service.projects = [];
     service.selectedTimeRecord = {};
     service.updateError = "";
     service.statusMessage = "";
+    service.initialized = false;
 
     function getCustomers() {
 
@@ -68,7 +71,17 @@
         );
     }
 
-    function getTimeRecords() {
+    service.getTimeRecords = function (startDate, endDate, customerId, projectId, onlyIfNotInitialized) {
+
+        if (service.initialized && onlyIfNotInitialized) {
+            return;
+        }
+
+        if (!service.initialized) {
+            service.initialized = true;
+        }
+
+        service.timeRecords = {};
 
         var headerInfo = accountHandler.getAccountHeader();
 
@@ -76,15 +89,15 @@
             method: "POST",
             url: "api/timerecords",
             headers: headerInfo,
-            params: { coId: service.coId }
+            data: { userId: service.userId, start: startDate, end: endDate, customerId: customerId, projectId: projectId }
         };
 
-        //$http(request)
-        //    .then(function (result) {
-        //        service.priceTypes = result.data;
-        //        $rootScope.$broadcast("priceTypeUpdate");
-        //    }
-        //);
+        $http(request)
+            .then(function (result) {
+                service.timeRecords = result.data;
+                $rootScope.$broadcast("timeRecordUpdate");
+            }
+        );
     }
 
     service.saveTimeRecord = function () {
@@ -92,7 +105,7 @@
         var headerInfo = accountHandler.getAccountHeader();
 
         var request = {
-            method: "POST",
+            method: "PUT",
             url: "api/timerecords",
             headers: headerInfo,
             data: service.selectedTimeRecord
@@ -100,22 +113,18 @@
 
         $http(request)
             .then(function () {
-                service.selectedCustomer = {};
+                service.selectedTimeRecord = {};
                 service.statusMessage = "Record saved.";
                 $rootScope.$broadcast("timeRecordSaved");
                 $rootScope.$broadcast("statusUpdate");
-                getTimeRecords();
             }
         );
 
     };
 
-
-
     getCustomers();
     getProjects();
     getPriceTypes();
-    getTimeRecords();
 
     return service;
 

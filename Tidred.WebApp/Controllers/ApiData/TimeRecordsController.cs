@@ -24,16 +24,28 @@ namespace Tidred.WebApp.Controllers.ApiData
                           {
                               Id = t.TimeEntryId,
                               ProjectId = t.ProjectId,
+                              ProjectName = GetProjectName(t.Project),
                               CustomerId = t.CustomerId,
+                              CustomerName = t.Customer.Name,
                               Hours = t.Hours,
                               Comment = t.Comment,
                               Day = t.Day.ToShortDateString(),
                               PriceTypeId = t.PriceTypeId,
+                              PriceTypeName = t.PriceType.Code,
                               Rate = t.Rate
                           })
                           .ToList();
 
             return result;
+        }
+
+        private string GetProjectName(Project project)
+        {
+            if (project == null)
+            {
+                return string.Empty;
+            }
+            return project.Name;
         }
 
         public void Put(TimeEntry entry)

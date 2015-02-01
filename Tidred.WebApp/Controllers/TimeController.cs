@@ -14,9 +14,15 @@ namespace Tidred.WebApp.Controllers
             return View();
         }
 
-        public string Hello()
+        public ActionResult TimePartial()
         {
-            return "Well, hello there " + User.Identity.Name;
+            return PartialView();
         }
+
+        public ActionResult TimeEditPartial()
+        {
+            return PartialView();
+        }
+
     }
 }

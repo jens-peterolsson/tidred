@@ -1,4 +1,4 @@
-﻿var timeApp = angular.module('timeApp', ["ngRoute"])
+﻿var timeApp = angular.module('timeApp', ["ngRoute", "ui.bootstrap", "ui.bootstrap.tpls"])
     .constant("urls", {
         "timeRecord": "/timeApp",
         "timeRecordEdit": "/timeApp/edit",
@@ -14,7 +14,7 @@ timeApp.config(["$routeProvider", "urls", function($routeProvider, urls) {
             controller: "timeRecordController"
         })
         .when(urls.timeRecordCreate, {
-            templateUrl: "/Time/TimeCreatePartial",
+            templateUrl: "/Time/TimeEditPartial",
             controller: "timeRecordEditController"
         })
         .when(urls.timeRecordEdit, {

@@ -267,6 +267,10 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -1142,6 +1146,8 @@
     <Content Include="Views\Admin\CustomerEditPartial.cshtml" />
     <Content Include="Views\Admin\UserCreatePartial.cshtml" />
     <Content Include="Views\Admin\ProjectEditPartial.cshtml" />
+    <Content Include="Views\Time\TimePartial.cshtml" />
+    <Content Include="Views\Time\TimeEditPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

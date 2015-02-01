@@ -1,0 +1,72 @@
+﻿<div ng-controller="timeRecordController">
+    <form class="row" name="timeForm" ng-submit="getTimeRecords()">
+        <fieldset class="pull-left">
+            <legend>Criteria</legend>
+
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Date From</label>
+                    <input type="text" name="startDate" datepicker-popup="{{format}}" is-open="startOpened"
+                           ng-click="startOpened=true" class="form-control" ng-model="startDate" required />
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>Date To</label>
+                    <input type="text" name="endDate" datepicker-popup="{{format}}" is-open="endOpened"
+                           ng-click="endOpened=true" class="form-control" ng-model="endDate" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Customer</label>
+                    <select name="customerSelect" class="form-control" ng-model="customerId" required
+                            ng-options="customer.customerId as customer.name for customer in customers"></select>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>Project</label>
+                    <select name="projectSelect" class="form-control" ng-model="projectId" required
+                            ng-options="project.projectId as project.name for project in projects"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <input type="submit" class="btn btn-primary" value="RETRIEVE" />
+                </div>
+            </div>
+            <div class="row" style="color: red">
+                <span ng-show="timeForm.startDate.$error.required">Enter start date.</span>
+                <span ng-show="timeForm.endDate.$error.required">Enter end date.</span>
+            </div>
+        </fieldset>
+    </form>
+
+    <div class="row">
+        <p>
+            <a href="#{{urls.timeRecordCreate}}">NEW RECORD</a>
+        </p>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th class="col-md-1">Id</th>
+            <th class="col-md-2">Day</th>
+            <th class="col-md-1">Customer</th>
+            <th class="col-md-2">Project</th>
+            <th class="col-md-1">Price Type</th>
+            <th class="col-md-1">Rate</th>
+            <th class="col-md-2">Comment</th>
+            <th class="col-md-1">Hours</th>
+            <th class="col-md-1"></th>
+        </tr>
+        <tr ng-repeat="timeRecord in timeRecords">
+            <td>{{timeRecord.id}}</td>
+            <td>{{timeRecord.day}}</td>
+            <td>{{timeRecord.customerName}}</td>
+            <td>{{timeRecord.projectName}}</td>
+            <td>{{timeRecord.priceTypeName}}</td>
+            <td>{{timeRecord.rate| number:0}}</td>
+            <td>{{timeRecord.comment}}</td>
+            <td>{{timeRecord.hours| number:2}}</td>
+            <td ng-click="setTimeRecord(timeRecord)"><a href="#{{urls.timeRecordEdit}}">EDIT</a></td>
+        </tr>
+    </table>
+</div>
+

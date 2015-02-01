@@ -1,5 +1,6 @@
 ﻿timeApp.controller('timeController', ["$scope", "timeService", "urls", "$timeout", "$location",
     function ($scope, timeService, urls, $timeout, $location) {
+
         $scope.urls = urls;
 
         $scope.$on('statusUpdate', function () {
@@ -14,6 +15,7 @@
         if (path == "/time" || path == "") {
             $location.path("/timeApp");
         }
+
     }
 
 ]);
