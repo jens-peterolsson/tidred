@@ -59,21 +59,21 @@ namespace Tidred.Tests
         [TestMethod]
         public void FlexBeforeSummer()
         {
-            var result = _tested.FlexResult("1", TestData.TestCoId, new DateTime(2015, 5, 5), new DateTime(2015, 5, 6));
+            var result = _tested.FlexResult("1", TestData.TestCoId, new DateTime(2015, 5, 5), new DateTime(2015, 5, 6), null);
             Assert.AreEqual("0,50", result[ReportConstants.Flex]);
         }
 
         [TestMethod]
         public void FlexAfterSummer()
         {
-            var result = _tested.FlexResult("1", TestData.TestCoId, new DateTime(2015, 9, 4), new DateTime(2015, 9, 6));
+            var result = _tested.FlexResult("1", TestData.TestCoId, new DateTime(2015, 9, 4), new DateTime(2015, 9, 6), null);
             Assert.AreEqual("-1,25", result[ReportConstants.Flex]);
         }
 
         [TestMethod]
         public void FlexDuringSummer()
         {
-            var result = _tested.FlexResult("1", TestData.TestCoId, new DateTime(2015, 6, 5), new DateTime(2015, 6, 5));
+            var result = _tested.FlexResult("1", TestData.TestCoId, new DateTime(2015, 6, 5), new DateTime(2015, 6, 5), null);
             Assert.AreEqual("1,00", result[ReportConstants.Flex]);
         }
 

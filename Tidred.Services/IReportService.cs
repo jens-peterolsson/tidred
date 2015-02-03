@@ -11,6 +11,6 @@ namespace Tidred.Services
         Dictionary<string, string> CustomerTotals(long customerId, DateTime startDate, DateTime endDate);
         Dictionary<string, string> ProjectSummary(long projectId, DateTime startDate, DateTime endDate);
         Dictionary<string, string> WorkingHours(string userId, DateTime startDate, DateTime endDate);
-        Dictionary<string, string> FlexResult(string userId, int coId, DateTime startDate, DateTime endDate);
+        Dictionary<string, string> FlexResult(string userId, int coId, DateTime startDate, DateTime endDate, long? customerId);
     }
 }

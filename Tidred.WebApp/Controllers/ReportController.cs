@@ -48,7 +48,7 @@ namespace Tidred.WebApp.Controllers
                     GetProjectSummary(model, reportService);
                     break;
                 case ReportType.Flex:
-                    model.Result = reportService.FlexResult(model.UserId, model.CoId, model.StartDate, model.EndDate);
+                    model.Result = reportService.FlexResult(model.UserId, model.CoId, model.StartDate, model.EndDate, model.CustomerId);
                     break;
             }
 

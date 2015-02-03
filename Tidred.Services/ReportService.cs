@@ -133,12 +133,12 @@ namespace Tidred.Services
         }
 
 
-        public Dictionary<string, string> FlexResult(string userId, int coId, DateTime startDate, DateTime endDate)
+        public Dictionary<string, string> FlexResult(string userId, int coId, DateTime startDate, DateTime endDate, long? customerId)
         {
             var result = new Dictionary<string, string>();
 
             // get all entries within period
-            var periodEntries = _timeRepo.GetEntries(userId, startDate, endDate, null, null).ToList();
+            var periodEntries = _timeRepo.GetEntries(userId, startDate, endDate, customerId, null).ToList();
             var schedules = _userRepo.GetWorkingSchedules(coId).ToList();
 
             var flex = 0m;
