@@ -18,13 +18,15 @@
             <div class="row">
                 <div class="form-group col-sm-6">
                     <label>Customer</label>
-                    <select name="customerSelect" class="form-control" ng-model="customerId" required
-                            ng-options="customer.customerId as customer.name for customer in customers"></select>
+                    <select name="customerSelect" class="form-control" ng-model="customerId"
+                            ng-change="projectId=''" ng-options="customer.customerId as customer.name for customer in customers"></select>
+                    <input type="button" class="btn btn-default" ng-click="clearCustomer()" value="CLEAR" />
                 </div>
                 <div class="form-group col-sm-6">
                     <label>Project</label>
-                    <select name="projectSelect" class="form-control" ng-model="projectId" required
-                            ng-options="project.projectId as project.name for project in projects"></select>
+                    <select name="projectSelect" class="form-control" ng-model="projectId" 
+                            ng-options="project.projectId as project.name for project in projects | filter:projectFilter"></select>
+                    <input type="button" class="btn btn-default" ng-click="clearProject()" value="CLEAR" />
                 </div>
             </div>
             <div class="row">

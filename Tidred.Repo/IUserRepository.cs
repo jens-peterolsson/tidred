@@ -12,5 +12,7 @@ namespace Tidred.Repo
         IEnumerable<User> GetUsers(int coId);
         void AddCompany(string userId, int coId);
         string GetUserId(string userName);
+        UserTimeEntryPref GetUserPrefs(string userId);
+        void StoreUserPrefs(UserTimeEntryPref prefs);
     }
 }

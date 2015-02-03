@@ -48,5 +48,37 @@ namespace Tidred.Repo
             Context.SaveChanges();
         }
 
+        public UserTimeEntryPref GetUserPrefs(string userId)
+        {
+            return Context.UserTimeEntryPrefs.SingleOrDefault(u => u.UserId == userId);
+        }
+
+        public void StoreUserPrefs(UserTimeEntryPref prefs)
+        {
+            var hasExistingPrefs = (GetUserPrefs(prefs.UserId) != null);
+
+            if (hasExistingPrefs)
+            {
+                UpdateUserPrefs(prefs);
+            }
+            else
+            {
+                CreateUserPrefs(prefs);
+            }
+        }
+
+        private void CreateUserPrefs(UserTimeEntryPref prefs)
+        {
+            Context.UserTimeEntryPrefs.Add(prefs);
+            Context.SaveChanges();
+        }
+
+        private void UpdateUserPrefs(UserTimeEntryPref prefs)
+        {
+            var existingPrefs = Context.UserTimeEntryPrefs.First(pref => pref.UserId == prefs.UserId);
+            Context.Entry(existingPrefs).CurrentValues.SetValues(prefs);
+            Context.SaveChanges();
+        }
+
     }
 }

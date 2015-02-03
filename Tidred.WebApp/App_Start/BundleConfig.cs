@@ -39,7 +39,7 @@ namespace Tidred.WebApp
                       "~/Scripts/angular-route.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular-ui").Include(
-                      "~/Scripts/angular-ui/ui-bootstrap.js",
+                      //"~/Scripts/angular-ui/ui-bootstrap.js",
                       "~/Scripts/angular-ui/ui-bootstrap-tpls.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/appAdmin").Include(

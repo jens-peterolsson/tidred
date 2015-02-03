@@ -1,1 +1,65 @@
-﻿
+﻿<div>
+    <form class="row" name="timeForm" ng-submit="save(timeForm)">
+        <fieldset class="pull-left">
+            <legend>Edit</legend>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Day</label>
+                    <input type="text" name="day" datepicker-popup="{{format}}" is-open="opened"
+                           ng-click="opened=true" class="form-control" ng-model="timeRecord.day" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Customer</label>
+                    <select name="customerSelect" class="form-control" ng-model="timeRecord.customerId" required
+                            ng-change="projectId=''" ng-options="customer.customerId as customer.name for customer in customers"></select>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>Project</label>
+                    <select name="projectSelect" class="form-control" ng-model="timeRecord.projectId"
+                            ng-options="project.projectId as project.name for project in projects | filter:projectFilter"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label>Price Type</label>
+                    <select name="priceTypeSelect" class="form-control" ng-model="timeRecord.priceTypeId" required
+                            ng-options="priceType.priceTypeId as priceType.name for priceType in priceTypes"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label>Hours</label>
+                    <input type="number" name="hours" class="form-control" ng-model="timeRecord.hours" required />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label>Comment</label>
+                    <input type="text" name="comment" class="form-control" ng-model="timeRecord.comment" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label>Rate</label>
+                    <input type="number" name="rate" class="form-control" ng-model="timeRecord.rate" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="SAVE" />
+                    <input type="button" class="btn btn-default" ng-click="cancel()" value="CANCEL" />
+                </div>
+            </div>
+            <div class="row" style="color: red">
+                <span ng-show="timeForm.day.$error.required">Enter day.</span>
+                <span ng-show="timeForm.customerSelect.$error.required">Enter customer.</span>
+                <span ng-show="timeForm.priceTypeSelect.$error.required">Enter price type.</span>
+                <span ng-show="timeForm.hours.$error.required">Enter hours.</span>
+                <span ng-show="timeForm.hours.$error.number">Enter valid hours.</span>
+                <span ng-show="timeForm.rate.$error.number">Enter valid rate.</span>
+            </div>
+        </fieldset>
+    </form>
+</div>

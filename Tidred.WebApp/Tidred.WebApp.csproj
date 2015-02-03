@@ -195,6 +195,7 @@
     <Compile Include="Controllers\ApiData\Dto\EntryParams.cs" />
     <Compile Include="Controllers\ApiData\Dto\PriceTypeData.cs" />
     <Compile Include="Controllers\ApiData\Dto\ProjectData.cs" />
+    <Compile Include="Controllers\ApiData\Dto\UserPrefs.cs" />
     <Compile Include="Controllers\ApiData\ProjectsController.cs" />
     <Compile Include="Controllers\ApiData\TimeRecordsController.cs" />
     <Compile Include="Controllers\ApiData\UsersController.cs" />

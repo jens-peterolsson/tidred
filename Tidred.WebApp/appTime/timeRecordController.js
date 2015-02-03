@@ -1,21 +1,20 @@
-﻿timeApp.controller('timeRecordController', ["$scope", "timeService", "urls", "$filter",
-    function ($scope, timeService, urls, $filter) {
+﻿timeApp.controller('timeRecordController', ["$scope", "timeService", "urls", 
+    function ($scope, timeService, urls) {
 
         $scope.urls = urls;
 
         $scope.startOpen = false;
         $scope.endOpen = false;
-        $scope.format = "yyyy-MM-dd";
-
+        $scope.format = timeService.format;
         
-        $scope.startDate = $filter('date')(new Date(2013, 2, 1), $scope.format);
-        $scope.endDate = $filter('date')(new Date(), $scope.format);
-        $scope.customerId = "";
+        $scope.startDate = timeService.startDate;
+        $scope.endDate = timeService.endDate;
+        $scope.customerId = timeService.customerId;
+        $scope.projectId = timeService.projectId;
         $scope.customers = timeService.customers;
         $scope.projects = timeService.projects;
 
-        $scope.projectId = "";
-        $scope.timeRecords = {};
+        $scope.timeRecords = timeService.timeRecords;
 
         $scope.$on('timeRecordSaved', function () {
             $scope.getTimeRecords();
@@ -37,6 +36,22 @@
             timeService.getTimeRecords($scope.startDate, $scope.endDate, $scope.customerId, $scope.projectId);
         };
 
-        timeService.getTimeRecords($scope.startDate, $scope.endDate, $scope.customerId, $scope.projectId, true);
+        $scope.projectFilter = function(project) {
+            return timeService.filterProjectByCustomer($scope.customerId, project);
+        };
+
+        $scope.setTimeRecord = function (timeRecord) {
+            timeService.selectedTimeRecord = angular.copy(timeRecord);
+        };
+
+        $scope.clearCustomer = function () {
+            $scope.customerId = "";
+        };
+
+        $scope.clearProject = function () {
+            $scope.projectId = "";
+        };
+
+        timeService.getTimeRecords($scope.startDate, $scope.endDate, $scope.customerId, $scope.projectId);
 
     }]);

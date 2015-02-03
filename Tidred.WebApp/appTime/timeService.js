@@ -1,4 +1,4 @@
-﻿timeApp.factory('timeService', ["$http", "$rootScope", function($http, $rootScope) {
+﻿timeApp.factory('timeService', ["$http", "$rootScope", "$filter", function($http, $rootScope, $filter) {
 
     var service = {};
 
@@ -9,10 +9,21 @@
     service.priceTypes = [];
     service.customers = [];
     service.projects = [];
+    service.filteredProjects = [];
     service.selectedTimeRecord = {};
     service.updateError = "";
     service.statusMessage = "";
-    service.initialized = false;
+    service.customerId = "";
+    service.projectId = "";
+    service.userPrefs = {};
+
+    service.format = "yyyy-MM-dd";
+
+    var date = new Date();
+    date.setDate(date.getDate() - 14);
+
+    service.startDate = $filter('date')(date, service.format);
+    service.endDate = $filter('date')(new Date(), service.format);
 
     function getCustomers() {
 
@@ -66,22 +77,19 @@
         $http(request)
             .then(function (result) {
                 service.projects = result.data;
+                service.filteredProjects = result.data;
                 $rootScope.$broadcast("projectUpdate");
             }
         );
     }
 
-    service.getTimeRecords = function (startDate, endDate, customerId, projectId, onlyIfNotInitialized) {
-
-        if (service.initialized && onlyIfNotInitialized) {
-            return;
-        }
-
-        if (!service.initialized) {
-            service.initialized = true;
-        }
+    service.getTimeRecords = function (startDate, endDate, customerId, projectId) {
 
         service.timeRecords = {};
+        service.startDate = startDate;
+        service.endDate = endDate;
+        service.customerId = customerId;
+        service.projectId = projectId;
 
         var headerInfo = accountHandler.getAccountHeader();
 
@@ -104,6 +112,10 @@
 
         var headerInfo = accountHandler.getAccountHeader();
 
+        service.selectedTimeRecord.userId = service.userId;
+        service.selectedTimeRecord.timeEntryId = service.selectedTimeRecord.id;
+        service.selectedTimeRecord.day = $filter('date')(service.selectedTimeRecord.day, service.format);
+
         var request = {
             method: "PUT",
             url: "api/timerecords",
@@ -113,6 +125,10 @@
 
         $http(request)
             .then(function () {
+                service.userPrefs.customerId = service.selectedTimeRecord.customerId;
+                service.userPrefs.projectId = service.selectedTimeRecord.projectId;
+                service.userPrefs.priceTypeId = service.selectedTimeRecord.priceTypeId;
+                storeUserPrefs();
                 service.selectedTimeRecord = {};
                 service.statusMessage = "Record saved.";
                 $rootScope.$broadcast("timeRecordSaved");
@@ -122,9 +138,51 @@
 
     };
 
+    service.filterProjectByCustomer = function(customerId, project) {
+        if (project.customerId == customerId) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    function getUserPrefs() {
+
+        var headerInfo = accountHandler.getAccountHeader();
+
+        var request = {
+            method: "GET",
+            url: "api/users/prefs",
+            headers: headerInfo,
+            params: { userId: service.userId }
+        };
+
+        $http(request)
+            .then(function (result) {
+                service.userPrefs = result.data;
+            }
+        );
+
+    }
+
+    function storeUserPrefs() {
+        
+        var headerInfo = accountHandler.getAccountHeader();
+
+        var request = {
+            method: "PUT",
+            url: "api/users/prefs",
+            headers: headerInfo,
+            data: service.userPrefs
+        };
+
+        $http(request);
+    }
+
     getCustomers();
     getProjects();
     getPriceTypes();
+    getUserPrefs();
 
     return service;
 
