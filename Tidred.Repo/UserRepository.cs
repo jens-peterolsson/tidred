@@ -80,5 +80,10 @@ namespace Tidred.Repo
             Context.SaveChanges();
         }
 
+        public IEnumerable<WorkingSchedule> GetWorkingSchedules(int coId)
+        {
+            var result = Context.WorkingSchedules.Where(s => s.CoId == coId);
+            return result;
+        }
     }
 }

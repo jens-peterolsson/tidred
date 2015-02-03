@@ -14,5 +14,6 @@ namespace Tidred.Repo
         string GetUserId(string userName);
         UserTimeEntryPref GetUserPrefs(string userId);
         void StoreUserPrefs(UserTimeEntryPref prefs);
+        IEnumerable<WorkingSchedule> GetWorkingSchedules(int coId);
     }
 }

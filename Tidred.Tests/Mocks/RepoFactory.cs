@@ -21,7 +21,7 @@ namespace Tidred.Tests.Mocks
 
     public IUserRepository CreateUserRepo()
     {
-        throw new System.NotImplementedException();
+        return new UserRepo();
     }
 
 

@@ -47,6 +47,9 @@ namespace Tidred.WebApp.Controllers
                 case ReportType.ProjectSummary:
                     GetProjectSummary(model, reportService);
                     break;
+                case ReportType.Flex:
+                    model.Result = reportService.FlexResult(model.UserId, model.CoId, model.StartDate, model.EndDate);
+                    break;
             }
 
             return View("Result", model);
@@ -100,11 +103,11 @@ namespace Tidred.WebApp.Controllers
 
             if (model.StartDate == DateTime.MinValue)
             {
-                model.StartDate = new DateTime(DateTime.Now.Year, 1, 1);
+                model.StartDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             }
             if (model.EndDate == DateTime.MinValue)
             {
-                model.EndDate = new DateTime(DateTime.Now.Year, 12, 31);
+                model.EndDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
             }
 
             return model;

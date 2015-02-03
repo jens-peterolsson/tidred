@@ -8,6 +8,7 @@ namespace Tidred.WebApp.Models
 {
     public enum ReportType
     {
+        Flex,
         CustomerTotal,
         CustomerPeriodTotal,
         ProjectSummary,

@@ -34,11 +34,9 @@ namespace Tidred.Tests.Mocks
         return TestData.CreateTimeEntries().Single(e => e.TimeEntryId == id);
     }
 
-
-
     public IEnumerable<TimeEntry> GetEntries(string userId, DateTime startDate, DateTime endDate, long? customerId, long? projectId)
     {
-        throw new NotImplementedException();
+        return TestData.CreateFlexEntries().Where(e => e.UserId == userId && e.Day >= startDate && e.Day <= endDate);
     }
   }
 }

@@ -11,6 +11,7 @@ namespace Tidred.Services
         private readonly ICustomerRepository _customerRepo = RepoFactory.Instance.CreateCustomerRepo();
         private readonly ITimeRepository _timeRepo = RepoFactory.Instance.CreateTimeRepo();
         private readonly IProjectRepository _projectRepo = RepoFactory.Instance.CreateProjectRepo();
+        private readonly IUserRepository _userRepo = RepoFactory.Instance.CreateUserRepo();
 
         private const string FormatWithDecimals = "{0:#,0.00}";
         private const string FormatWithoutDecimals = "{0:#,0}";
@@ -129,6 +130,39 @@ namespace Tidred.Services
         {
             var selectionValue = startDate.ToShortDateString() + " - " + endDate.ToShortDateString();
             dict.Add(ReportConstants.Period, selectionValue);
+        }
+
+
+        public Dictionary<string, string> FlexResult(string userId, int coId, DateTime startDate, DateTime endDate)
+        {
+            var result = new Dictionary<string, string>();
+
+            // get all entries within period
+            var periodEntries = _timeRepo.GetEntries(userId, startDate, endDate, null, null).ToList();
+            var schedules = _userRepo.GetWorkingSchedules(coId).ToList();
+
+            var flex = 0m;
+            var indexDate = startDate;
+            
+            while (indexDate <= endDate)
+            {
+                var normalHours = 0m;
+
+                if (indexDate.DayOfWeek != DayOfWeek.Saturday && indexDate.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    var schedule = schedules.Single(s => s.StartMonth <= indexDate.Month && s.EndMonth >= indexDate.Month);
+                    normalHours = schedule.WorkingHours;
+                }
+
+                var workedHours =
+                    periodEntries.Where(entry => entry.Day.Date == indexDate.Date).Sum(entry => entry.Hours);
+                
+                flex += workedHours - normalHours;
+                indexDate = indexDate.AddDays(1);
+            }
+
+            result.Add(ReportConstants.Flex, string.Format(FormatWithDecimals, flex));
+            return result;
         }
     }
 }

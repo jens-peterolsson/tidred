@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Tidred.Repo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Tidred.Repo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -47,7 +47,7 @@
           <Property Name="UserName" Type="nvarchar(max)" />
           <Property Name="PasswordHash" Type="nvarchar(max)" />
           <Property Name="SecurityStamp" Type="nvarchar(max)" />
-          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
           <Property Name="IsConfirmed" Type="bit" />
@@ -133,6 +133,16 @@
           <Property Name="CustomerId" Type="bigint" Nullable="false" />
           <Property Name="ProjectId" Type="bigint" />
           <Property Name="PriceTypeId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="WorkingSchedules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CoId" Type="int" Nullable="false" />
+          <Property Name="StartMonth" Type="int" Nullable="false" />
+          <Property Name="EndMonth" Type="int" Nullable="false" />
+          <Property Name="WorkingHours" Type="numeric" Precision="5" Scale="2" Nullable="false" />
         </EntityType>
         <Association Name="FK_Customers_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
@@ -370,6 +380,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WorkingSchedules_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="WorkingSchedules" Type="Self.WorkingSchedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CoID" />
+            </Principal>
+            <Dependent Role="WorkingSchedules">
+              <PropertyRef Name="CoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="TidredRepoStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -385,6 +407,7 @@
           <EntitySet Name="TimeEntries" EntityType="Self.TimeEntries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserCompany" EntityType="Self.UserCompany" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTimeEntryPrefs" EntityType="Self.UserTimeEntryPrefs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkingSchedules" EntityType="Self.WorkingSchedules" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Customers_Company" Association="Self.FK_Customers_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Customers" EntitySet="Customers" />
@@ -461,9 +484,12 @@
             <End Role="Projects" EntitySet="Projects" />
             <End Role="UserTimeEntryPrefs" EntitySet="UserTimeEntryPrefs" />
           </AssociationSet>
+          <AssociationSet Name="FK_WorkingSchedules_Company" Association="Self.FK_WorkingSchedules_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="WorkingSchedules" EntitySet="WorkingSchedules" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Tidred.Repo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -504,7 +530,7 @@
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="IsConfirmed" Type="Boolean" />
@@ -529,6 +555,7 @@
           <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Company" FromRole="Company" ToRole="Customers" />
           <NavigationProperty Name="PriceTypes" Relationship="Self.FK_PriceTypes_Company" FromRole="Company" ToRole="PriceTypes" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.UserCompany" FromRole="Company" ToRole="AspNetUsers" />
+          <NavigationProperty Name="WorkingSchedules" Relationship="Tidred.Repo.FK_WorkingSchedules_Company" FromRole="Company" ToRole="WorkingSchedule" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -888,7 +915,35 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Company" EntitySet="Companies" />
           </AssociationSet>
+          <EntitySet Name="WorkingSchedules" EntityType="Tidred.Repo.WorkingSchedule" />
+          <AssociationSet Name="FK_WorkingSchedules_Company" Association="Tidred.Repo.FK_WorkingSchedules_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="WorkingSchedule" EntitySet="WorkingSchedules" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="WorkingSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CoId" Type="Int32" Nullable="false" />
+          <Property Name="StartMonth" Type="Int32" Nullable="false" />
+          <Property Name="EndMonth" Type="Int32" Nullable="false" />
+          <Property Name="WorkingHours" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="Company" Relationship="Tidred.Repo.FK_WorkingSchedules_Company" FromRole="WorkingSchedule" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_WorkingSchedules_Company">
+          <End Type="Tidred.Repo.Company" Role="Company" Multiplicity="1" />
+          <End Type="Tidred.Repo.WorkingSchedule" Role="WorkingSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CoID" />
+            </Principal>
+            <Dependent Role="WorkingSchedule">
+              <PropertyRef Name="CoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1035,6 +1090,17 @@
               <ScalarProperty Name="CoID" ColumnName="CoId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="WorkingSchedules">
+            <EntityTypeMapping TypeName="Tidred.Repo.WorkingSchedule">
+              <MappingFragment StoreEntitySet="WorkingSchedules">
+                <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+                <ScalarProperty Name="EndMonth" ColumnName="EndMonth" />
+                <ScalarProperty Name="StartMonth" ColumnName="StartMonth" />
+                <ScalarProperty Name="CoId" ColumnName="CoId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

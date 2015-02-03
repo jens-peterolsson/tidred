@@ -5,18 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="491757d3ba194fe288965e7d5c446422" Name="Diagram1">
-        <EntityTypeShape EntityType="Tidred.Repo.AspNetRole" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tidred.Repo.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tidred.Repo.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tidred.Repo.AspNetUser" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tidred.Repo.Company" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tidred.Repo.Currency" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tidred.Repo.Customer" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tidred.Repo.PriceType" Width="1.5" PointX="7.5" PointY="16.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tidred.Repo.ProjectFixedPrice" Width="1.5" PointX="12" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tidred.Repo.Project" Width="1.5" PointX="9.75" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tidred.Repo.TimeEntry" Width="1.5" PointX="9.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Tidred.Repo.UserTimeEntryPref" Width="1.5" PointX="12.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.AspNetRole" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.AspNetUser" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.Company" Width="1.5" PointX="5.25" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.Currency" Width="1.5" PointX="8.25" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.Customer" Width="1.5" PointX="10.5" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.PriceType" Width="1.5" PointX="7.5" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.ProjectFixedPrice" Width="1.5" PointX="15" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.Project" Width="1.5" PointX="12.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.TimeEntry" Width="1.5" PointX="9.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tidred.Repo.UserTimeEntryPref" Width="1.5" PointX="12.75" PointY="18.5" IsExpanded="true" />
         <AssociationConnector Association="Tidred.Repo.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" ManuallyRouted="false" />
         <AssociationConnector Association="Tidred.Repo.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Tidred.Repo.FK_TimeEntries_AspNetUsers" ManuallyRouted="false" />
@@ -34,6 +34,8 @@
         <AssociationConnector Association="Tidred.Repo.FK_UserTimeEntryPrefs_Projects" ManuallyRouted="false" />
         <AssociationConnector Association="Tidred.Repo.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="Tidred.Repo.UserCompany" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Tidred.Repo.WorkingSchedule" Width="1.5" PointX="7.5" PointY="20.25" />
+        <AssociationConnector Association="Tidred.Repo.FK_WorkingSchedules_Company" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

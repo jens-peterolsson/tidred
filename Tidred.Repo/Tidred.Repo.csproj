@@ -116,6 +116,9 @@
     <Compile Include="UserTimeEntryPref.cs">
       <DependentUpon>TidredEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="WorkingSchedule.cs">
+      <DependentUpon>TidredEntities.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

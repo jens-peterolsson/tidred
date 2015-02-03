@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tidred.Repo;
 using Tidred.Services;
+using Tidred.Tests.Mocks;
+using RepoFactory = Tidred.Repo.RepoFactory;
 
 namespace Tidred.Tests
 {
@@ -53,6 +54,27 @@ namespace Tidred.Tests
             Assert.AreEqual("5,00", result[ReportConstants.TotalNoOfHours]);
             Assert.AreEqual(3125, double.Parse(result[ReportConstants.TotalAmount]));
             Assert.AreEqual("625", result[ReportConstants.AmountPerHour]);
+        }
+
+        [TestMethod]
+        public void FlexBeforeSummer()
+        {
+            var result = _tested.FlexResult("1", TestData.TestCoId, new DateTime(2015, 5, 5), new DateTime(2015, 5, 6));
+            Assert.AreEqual("0,50", result[ReportConstants.Flex]);
+        }
+
+        [TestMethod]
+        public void FlexAfterSummer()
+        {
+            var result = _tested.FlexResult("1", TestData.TestCoId, new DateTime(2015, 9, 4), new DateTime(2015, 9, 6));
+            Assert.AreEqual("-1,25", result[ReportConstants.Flex]);
+        }
+
+        [TestMethod]
+        public void FlexDuringSummer()
+        {
+            var result = _tested.FlexResult("1", TestData.TestCoId, new DateTime(2015, 6, 5), new DateTime(2015, 6, 5));
+            Assert.AreEqual("1,00", result[ReportConstants.Flex]);
         }
 
     }

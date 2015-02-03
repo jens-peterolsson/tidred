@@ -15,5 +15,6 @@ namespace Tidred.Services
         public const string Project = "Projekt";
         public const string TotalNoOfHours = "Totalt antal timmar";
         public const string Period = "Period";
+        public const string Flex = "Flexsaldo för perioden";
     }
 }

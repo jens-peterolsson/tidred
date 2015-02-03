@@ -12,7 +12,7 @@ namespace Tidred.Repo
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class TidredContext : DbContext
     {
         public TidredContext()
@@ -37,5 +37,6 @@ namespace Tidred.Repo
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<TimeEntry> TimeEntries { get; set; }
         public virtual DbSet<UserTimeEntryPref> UserTimeEntryPrefs { get; set; }
+        public virtual DbSet<WorkingSchedule> WorkingSchedules { get; set; }
     }
 }

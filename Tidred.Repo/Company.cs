@@ -19,6 +19,7 @@ namespace Tidred.Repo
             this.Customers = new HashSet<Customer>();
             this.PriceTypes = new HashSet<PriceType>();
             this.AspNetUsers = new HashSet<AspNetUser>();
+            this.WorkingSchedules = new HashSet<WorkingSchedule>();
         }
     
         public int CoID { get; set; }
@@ -27,5 +28,6 @@ namespace Tidred.Repo
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<PriceType> PriceTypes { get; set; }
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        public virtual ICollection<WorkingSchedule> WorkingSchedules { get; set; }
     }
 }
