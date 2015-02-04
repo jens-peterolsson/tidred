@@ -17,6 +17,10 @@
             $scope.timeRecord.priceTypeId = timeService.userPrefs.priceTypeId;
         }
 
+        $scope.$watch('timeRecord.hours', function(newVal) {
+            $scope.timeRecord.hours = newVal.replace(/,/g, '.');
+        });
+
         $scope.statusMessageShow = false;
 
         $scope.save = function(form) {
