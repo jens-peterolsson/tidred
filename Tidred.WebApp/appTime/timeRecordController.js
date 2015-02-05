@@ -1,5 +1,5 @@
-﻿timeApp.controller('timeRecordController', ["$scope", "timeService", "urls", 
-    function ($scope, timeService, urls) {
+﻿timeApp.controller('timeRecordController', ["$scope", "timeService", "urls", "$filter",
+    function ($scope, timeService, urls, $filter) {
 
         $scope.urls = urls;
 
@@ -33,6 +33,8 @@
         });
 
         $scope.getTimeRecords = function() {
+            $scope.startDate = $filter('date')($scope.startDate, $scope.format);
+            $scope.endDate = $filter('date')($scope.endDate, $scope.format);
             timeService.getTimeRecords($scope.startDate, $scope.endDate, $scope.customerId, $scope.projectId);
         };
 
@@ -52,6 +54,6 @@
             $scope.projectId = "";
         };
 
-        timeService.getTimeRecords($scope.startDate, $scope.endDate, $scope.customerId, $scope.projectId);
+        $scope.getTimeRecords();
 
     }]);

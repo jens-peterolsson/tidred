@@ -107,7 +107,7 @@ namespace Tidred.WebApp.Controllers
             }
             if (model.EndDate == DateTime.MinValue)
             {
-                model.EndDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+                model.EndDate = DateTime.Today;
             }
 
             return model;
